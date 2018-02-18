@@ -69,7 +69,7 @@ int main()
 				std::cout << RESET;
 
 // QUITAR EL COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
-//				ed::leerVectores(u,v,w);
+			ed::leerVectores(u,v,w);
 
 				break;
 
@@ -79,8 +79,8 @@ int main()
 				std::cout << RESET;
 
 // QUITAR EL COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
-//				std::cout << "k = "; 
-//				std::cin >> k;
+			std::cout << "k = "; 
+				std::cin >> k;
 
 				break;
 
@@ -92,10 +92,10 @@ int main()
 
 // QUITAR EL COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
 				// Número escalar
-//				std::cout  << BIYELLOW << "k = " << RESET << k << std::endl;
+				std::cout  << BIYELLOW << "k = " << RESET << k << std::endl;
 
 				// Vectores
-//				ed::escribirVectores(u,v,w);
+     			ed::escribirVectores(u,v,w);
 
 				break;
 
@@ -106,7 +106,7 @@ int main()
 				std::cout << RESET;
 
 // QUITAR EL COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
-//				ed::observadoresDeVectores(u,v);
+				ed::observadoresDeVectores(u,v);
 
 				break;
 
@@ -116,7 +116,7 @@ int main()
 				std::cout << RESET;
 
 // QUITAR EL COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
-//				ed::modificarVector(u,v,k);
+				ed::modificarVector(u,v,k);
 
 				break;
 
@@ -126,7 +126,7 @@ int main()
 				std::cout << RESET;
 
 // QUITAR EL COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
-//				ed::mostrarProductoEscalar(u,v);
+				ed::mostrarProductoEscalar(u,v);
 
 				break;
 
@@ -137,7 +137,7 @@ int main()
 				std::cout << RESET;
 
 // QUITAR EL COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
-//				ed::mostrarProductoVectorial(u,v);
+    			ed::mostrarProductoVectorial(u,v);
 
 				break;
 
@@ -148,7 +148,7 @@ int main()
 				std::cout << RESET;
 
 // QUITAR EL COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
-//				ed::mostrarProductoMixto(u,v,w);
+				ed::mostrarProductoMixto(u,v,w);
 
 				break;
 
@@ -158,7 +158,7 @@ int main()
 				std::cout << RESET;
 
 // QUITAR EL COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
-//				ed::mostrarOperadores(u,v,w,k);
+				ed::mostrarOperadores(u,v,w,k);
 
 				break;
 
