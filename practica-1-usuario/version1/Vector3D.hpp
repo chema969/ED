@@ -153,6 +153,19 @@ class Vector3D
           Producto mixto=\f$\vec{u}*(\vec{v}\f$^\f$\vec{w})\f$
         */
       inline double productoMixto(Vector3D const &v, Vector3D const &w)const{return dotProduct(v.crossProduct(w));}
+
+     /*! @fn Vector3D vectorUnitario
+          @brief Devuelve el vector unitario
+          @pre \f$||\vec{u}||>0\f$ 
+          @return Vector unitario de \f$ \vec{u} \f$
+          
+          Vector unitario=\f$\frac{\vec{u}}{||\vec{u}||}\f$
+        */
+      inline Vector3D vectorUnitario()const{assert(modulo()>0);Vector3D v(get1()/modulo(),get2()/modulo(),get3()/modulo()); return v;}     
+
+
+
+
 	//! \name Modificadores: funciones de modificación de Vector3D
 
       /*! @fn void set1

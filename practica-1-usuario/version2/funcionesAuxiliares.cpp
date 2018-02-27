@@ -57,6 +57,9 @@ int ed::menu()
 	PLACE(posicion++,10);
   	std::cout << "[9] Mostrar el uso de los operadores con u y v" << std::endl; 
 
+        PLACE(posicion++,10);
+        std::cout << "[10] Mostrar el vector unitario de u y v" << std::endl;
+
 	posicion++;
 	PLACE(posicion++,10);
 	std::cout << BIRED << "[0] Fin del programa" << RESET << std::endl;
@@ -82,7 +85,7 @@ void ed::leerVectores(ed::Vector3D &u, ed::Vector3D &v, ed::Vector3D &w)
 
    
 
- // QUITAR LOS "COMENTARIOS DE BLOQUE" CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
+
 
 
 	// Usando la función de la clase
@@ -113,7 +116,7 @@ void ed::leerVectores(ed::Vector3D &u, ed::Vector3D &v, ed::Vector3D &w)
 
 void ed::escribirVectores(ed::Vector3D const &u, ed::Vector3D const &v, ed::Vector3D const &w)
 {
- // QUITAR LOS "COMENTARIOS DE BLOQUE" CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
+
 
 	// Usando la función de la clase
 	std::cout  << BIYELLOW << "u = "  << RESET ; 
@@ -132,7 +135,7 @@ void ed::escribirVectores(ed::Vector3D const &u, ed::Vector3D const &v, ed::Vect
 
 void ed::observadoresDeVectores(ed::Vector3D const &u, ed::Vector3D const &v)
 {
- // QUITAR LOS "COMENTARIOS DE BLOQUE" CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
+
 
 	// Usando la función de la clase
 	std::cout  << BIYELLOW << "u = "  << RESET ; 
@@ -217,7 +220,7 @@ void ed::observadoresDeVectores(ed::Vector3D const &u, ed::Vector3D const &v)
 
 void ed::modificarVector(ed::Vector3D &u, ed::Vector3D const &v, double k)
 {
- // QUITAR LOS "COMENTARIOS DE BLOQUE" CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
+
 
    	std::cout << BIBLUE;
   	std::cout << "Modificaciones del vector " << std::endl; 
@@ -282,7 +285,7 @@ void ed::modificarVector(ed::Vector3D &u, ed::Vector3D const &v, double k)
 
 void ed::mostrarProductoEscalar(ed::Vector3D const &u, ed::Vector3D const &v)
 {
- // QUITAR LOS "COMENTARIOS DE BLOQUE" CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
+
 
 
 	std::cout << BIBLUE;
@@ -308,7 +311,7 @@ void ed::mostrarProductoEscalar(ed::Vector3D const &u, ed::Vector3D const &v)
 
 void ed::mostrarProductoVectorial(ed::Vector3D const &u, ed::Vector3D const &v)
 {
- // QUITAR LOS "COMENTARIOS DE BLOQUE" CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
+
 
  
 	// Se comprueba si no son nulos
@@ -353,7 +356,7 @@ void ed::mostrarProductoVectorial(ed::Vector3D const &u, ed::Vector3D const &v)
 
 void ed::mostrarProductoMixto(ed::Vector3D const &u, ed::Vector3D const &v, ed::Vector3D const &w)
 {
- // QUITAR LOS "COMENTARIOS DE BLOQUE" CUANDO SE HAYA CODIFICADO LA CLASE Vector3D
+
 
 
 	// Se comprueba si no son nulos v y w
@@ -460,10 +463,24 @@ void ed::mostrarOperadores(ed::Vector3D const &u, ed::Vector3D const &v, ed::Vec
 	return;
 }
 
+void ed::mostrarUnitario(ed::Vector3D const &u,ed::Vector3D const &v){
+     ed::Vector3D aux;
+     aux=u.vectorUnitario();
+     //////////////////////////
+     std::cout << BIGREEN;
+     std::cout << "Vector unitario de u=";
+     std::cout << RESET;
+     aux.escribirVector3D(); 
+     std::cout << std::endl;
+     ////////////////////////
+     aux=v.vectorUnitario();
+     std::cout << BIGREEN;
+     std::cout << "Vector unitario de v=";
+     std::cout << RESET;
+     aux.escribirVector3D(); 
+     std::cout << std::endl;
 
-
-
-
+}
 
 
 		

@@ -24,21 +24,21 @@ ndebug: objetivo
 # Primer objetivo 
 $(NAME).exe: $(OBJECTS)
 			@echo "Generando " $@
-			@g++-4.9 $^ -o $@
+			@g++ $^ -o $@
 #
 $(NAME).o: $(NAME).cpp $(INCLUDES)
 			@echo "Compilando " $<
-			@g++-4.9 $(CPPFLAGS) $<
+			@g++ $(CPPFLAGS) $<
 
 #
 funcionesAuxiliares.o: funcionesAuxiliares.cpp $(INCLUDES)
 			@echo "Compilando " $<
-			@g++-4.9 $(CPPFLAGS) $<
+			@g++ $(CPPFLAGS) $<
 
 #
 Vector3D.o: Vector3D.cpp Vector3D.hpp macros.hpp
 			@echo "Compilando " $<
-			@g++-4.9 $(CPPFLAGS) $<
+			@g++ $(CPPFLAGS) $<
 
 
 # Generación de la documentación
