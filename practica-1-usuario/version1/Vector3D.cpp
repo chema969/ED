@@ -12,7 +12,7 @@
 
 // Para controlar las pre y post condiciones mediante asertos
 #include <cassert>
-
+#include <cstdlib>
 #include <string>
 #include "Vector3D.hpp"
 
@@ -28,7 +28,11 @@ ed::Vector3D ed::Vector3D::crossProduct(ed::Vector3D const &v)const {
             get3()*v.get1()-get1()*v.get3(),
             get1()*v.get2()-get2()*v.get1());
   assert(dotProduct(w) == 0); 
-  assert(v.dotProduct(w) == 0);return w;  }
+  assert(v.dotProduct(w) == 0);
+  double a=abs(w.modulo()-(modulo()*v.modulo()*sin(angulo(v)))); 
+  assert(a<=COTA_ERROR);
+
+   return w;  }
 ////////////////////////////////////////////////////////////////
 
 // MODIFICADORES
