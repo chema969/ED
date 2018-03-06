@@ -135,17 +135,25 @@ namespace ed {
 		return false;
           }
         bool isLastItem();
-        inline ed::Municipio getCurrentItem(){
+        inline ed::Municipio const & getCurrentItem(){
                  #ifndef NDEBUG
 			assert(!isEmpty());
 		#endif //NDEBUG	
 		return _current->getItem();
         }
-        ed::Municipio getPreviousItem();
-        ed::Municipio getNextItem();
+        ed::Municipio const &getPreviousItem();
+        ed::Municipio const &getNextItem();
     //! \name Modificadores públicos
 
-	// COMPLETAR EL RESTO DE MODIFICADORES PÚBLICOS
+	inline void gotoHead(){
+              #ifndef NDEBUG
+			assert(!isEmpty());
+		#endif
+               setCurrent(getHead());
+              #ifndef NDEBUG
+			assert(isFirstItem());
+		#endif
+    }
 
 	
 
