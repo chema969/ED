@@ -90,7 +90,12 @@ namespace ed {
 	*/
 	inline ListaDoblementeEnlazadaOrdenadaMunicipios()
     {
-		  // DEBES CODIFICAR ESTA FUNCIÓN	
+	_head=NULL;
+        _current=NULL;
+		 #ifndef NDEBUG
+			// Se comprueba la postcondición
+			assert(isEmpty());
+		#endif //NDEBUG		
 	}
 	
   
@@ -103,7 +108,7 @@ namespace ed {
 	*/
 	~ListaDoblementeEnlazadaOrdenadaMunicipios ()
      {
-		  // DEBES CODIFICAR ESTA FUNCIÓN
+
      }
 
 
@@ -117,13 +122,27 @@ namespace ed {
     */
 	inline bool isEmpty() const
 	{
-  		// DEBES CODIFICAR ESTA FUNCIÓN
- 		// SE DEVUELVE UN VALOR ARBITRARIO PARA QUE EL CÓDIGO SE PUEDA COMPILAR
-		return true;
+  		if(getHead()==NULL) return true;
+		return false;
 	}
 
-	// COMPLETAR EL RESTO DE OBSERVADORES PÚBLICOS
-
+	int nItems();
+        inline bool isFirstItem(){	 
+                #ifndef NDEBUG
+			assert(!isEmpty());
+		#endif //NDEBUG	
+                if(getCurrent()==getHead())return true;
+		return false;
+          }
+        bool isLastItem();
+        inline ed::Municipio getCurrentItem(){
+                 #ifndef NDEBUG
+			assert(!isEmpty());
+		#endif //NDEBUG	
+		return _current->getItem();
+        }
+        ed::Municipio getPreviousItem();
+        ed::Municipio getNextItem();
     //! \name Modificadores públicos
 
 	// COMPLETAR EL RESTO DE MODIFICADORES PÚBLICOS
