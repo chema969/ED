@@ -62,7 +62,7 @@ class Provincia
        @brief Constructor de la clase Provincia
        @param nombre Nombre de la provincia
        @param codigo Codigo de la provincia*/
-    Provincia(std::string nombre,int codigo){_nombre=nombre;_codigo=codigo;} 
+    Provincia(std::string nombre="ninguno",int codigo=0){_nombre=nombre;_codigo=codigo;} 
 	/////////////////////////////////////////////////////////////////////
 
 	//!	\name Observadores

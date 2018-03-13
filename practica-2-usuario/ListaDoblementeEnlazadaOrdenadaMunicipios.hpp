@@ -144,7 +144,28 @@ namespace ed {
         ed::Municipio getPreviousItem();
         ed::Municipio getNextItem();
     //! \name Modificadores públicos
+        inline void gotoHead(){
+                    #ifndef NDEBUG
+			assert(!isEmpty());
+		    #endif //NDEBUG	
+                setCurrent(getHead());}
+          void gotoLast();
+         inline void gotoPrevious(){       
+         #ifndef NDEBUG
+		assert(!isEmpty());
+		assert(!isFirstItem());
+	#endif //NDEBUG
+        setCurrent(_current->getPrevious());
+       }
 
+        inline void gotoNext(){       
+         #ifndef NDEBUG
+		assert(!isEmpty());
+		assert(!isLastItem());
+	#endif //NDEBUG
+        setCurrent(_current->getNext());
+       }
+        bool find(const ed::Municipio item);
 	// COMPLETAR EL RESTO DE MODIFICADORES PÚBLICOS
 
 	

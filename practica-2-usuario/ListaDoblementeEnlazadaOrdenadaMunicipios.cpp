@@ -8,7 +8,7 @@
 
 // Para comprobar las pre y post-condiciones
 #include <cassert>
-
+#include <string>
 #include "ListaDoblementeEnlazadaOrdenadaMunicipios.hpp"
 #include "NodoMunicipioInterfaz.hpp"
 #include "Municipio.hpp"
@@ -18,18 +18,15 @@ int ed::ListaDoblementeEnlazadaOrdenadaMunicipios::nItems(){
     int cont=0;
        while(it->getNext()!=NULL){
 	 cont++;
-         it=it->getNext()}
+         it=it->getNext();}
     return cont;
 }
 
 bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::isLastItem(){
         #ifndef NDEBUG
 		assert(!isEmpty());
-	#endif //NDEBUG	
-    ed::NodoDoblementeEnlazadoMunicipio *it=getHead();
-       while(it->getNext()!=NULL){
-         it=it->getNext()}
-    if(it==getCurrent()) return true;
+	#endif //NDEBUG
+    if(_current->getNext()!=NULL) return true;
     return false;
 }
 
@@ -49,4 +46,29 @@ ed::Municipio ed::ListaDoblementeEnlazadaOrdenadaMunicipios::getNextItem(){
 	#endif //NDEBUG
        ed::NodoDoblementeEnlazadoMunicipio *it=_current->getNext();
        return it->getItem();
+}
+
+void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::gotoLast(){
+       #ifndef NDEBUG
+		assert(!isEmpty());
+	#endif //NDEBUG
+     ed::NodoDoblementeEnlazadoMunicipio *it=getCurrent();
+       while(it->getNext()!=NULL) it=it->getNext();
+     setCurrent(it);
+    }
+
+
+bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::find(const ed::Municipio &item){
+      ed::NodoDoblementeEnlazadoMunicipio *it=getHead();
+      const ed::Municipio aux;
+        while(it->getNext()!=NULL){
+         aux=it->getItem();
+           if(item.getNombre()==aux.getNombre()){
+              setCurrent(it);
+              return true;
+             }
+           it=it->getNext();
+            }
+         
+       
 }
