@@ -12,6 +12,7 @@
 #include "ListaDoblementeEnlazadaOrdenadaMunicipios.hpp"
 #include "NodoMunicipioInterfaz.hpp"
 #include "Municipio.hpp"
+#include "NodoDoblementeEnlazadoMunicipio.hpp"
 
 int ed::ListaDoblementeEnlazadaOrdenadaMunicipios::nItems(){
     ed::NodoDoblementeEnlazadoMunicipio *it=getHead();
@@ -25,12 +26,20 @@ int ed::ListaDoblementeEnlazadaOrdenadaMunicipios::nItems(){
 bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::isLastItem(){
         #ifndef NDEBUG
 		assert(!isEmpty());
+<<<<<<< HEAD
 	#endif //NDEBUG
     if(_current->getNext()!=NULL) return true;
+=======
+	#endif //NDEBUG	
+    ed::NodoDoblementeEnlazadoMunicipio *it=getHead();
+       while(it->getNext()!=NULL)
+         it=it->getNext();
+    if(it==getCurrent()) return true;
+>>>>>>> 56cd29cccf5c73c646bc18b9602f2057c0d09349
     return false;
 }
 
-ed::Municipio ed::ListaDoblementeEnlazadaOrdenadaMunicipios::getPreviousItem(){
+ed::Municipio const &ed::ListaDoblementeEnlazadaOrdenadaMunicipios::getPreviousItem(){
          #ifndef NDEBUG
 		assert(!isEmpty());
 		assert(!isFirstItem());
@@ -39,7 +48,7 @@ ed::Municipio ed::ListaDoblementeEnlazadaOrdenadaMunicipios::getPreviousItem(){
        return it->getItem();
 }
 
-ed::Municipio ed::ListaDoblementeEnlazadaOrdenadaMunicipios::getNextItem(){
+ed::Municipio const &ed::ListaDoblementeEnlazadaOrdenadaMunicipios::getNextItem(){
          #ifndef NDEBUG
 		assert(!isEmpty());
 		assert(!isLastItem());
@@ -48,6 +57,7 @@ ed::Municipio ed::ListaDoblementeEnlazadaOrdenadaMunicipios::getNextItem(){
        return it->getItem();
 }
 
+<<<<<<< HEAD
 void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::gotoLast(){
        #ifndef NDEBUG
 		assert(!isEmpty());
@@ -72,3 +82,18 @@ bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::find(const ed::Municipio &it
          
        
 }
+=======
+
+void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::gotoLast(){
+               #ifndef NDEBUG
+			assert(!isEmpty());
+		#endif
+               ed::NodoDoblementeEnlazadoMunicipio *it=getHead();
+              while(it->getNext()!=NULL)
+               it=it->getNext();
+               setCurrent(it);
+              #ifndef NDEBUG
+			assert(_current==_head);
+		#endif
+    }
+>>>>>>> 56cd29cccf5c73c646bc18b9602f2057c0d09349
