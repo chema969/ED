@@ -34,7 +34,7 @@ namespace ed {
   \brief Definición de la clase ListaDoblementeEnlazadaOrdenadaMunicipios
 	  	\n Lista doblemente enlazada de nodos de municipios ordenados alfabéticamente de forma ascendente 
 */
-  class ListaDoblementeEnlazadaOrdenadaMunicipios: public ed::ListaOrdenadaMunicipiosInterfaz
+  class ListaDoblementeEnlazadaOrdenadaMunicipios:public ed::ListaOrdenadaMunicipiosInterfaz
   {
 	//! \name  Atributos y métodos privados 
 
@@ -145,11 +145,7 @@ namespace ed {
         ed::Municipio const &getNextItem();
     //! \name Modificadores públicos
 
-        inline void gotoHead(){
-                    #ifndef NDEBUG
-			assert(!isEmpty());
-		    #endif //NDEBUG	
-                setCurrent(getHead());}
+ 
           void gotoLast();
          inline void gotoPrevious(){       
          #ifndef NDEBUG
@@ -158,17 +154,6 @@ namespace ed {
 	#endif //NDEBUG
         setCurrent(_current->getPrevious());
        }
-
-        inline void gotoNext(){       
-         #ifndef NDEBUG
-		assert(!isEmpty());
-		assert(!isLastItem());
-	#endif //NDEBUG
-        setCurrent(_current->getNext());
-       }
-        bool find(const ed::Municipio item);
-	// COMPLETAR EL RESTO DE MODIFICADORES PÚBLICOS
-
 
 	inline void gotoHead(){
               #ifndef NDEBUG
@@ -179,6 +164,19 @@ namespace ed {
 			assert(isFirstItem());
 		#endif
     }
+
+        inline void gotoNext(){       
+         #ifndef NDEBUG
+		assert(!isEmpty());
+		assert(!isLastItem());
+	#endif //NDEBUG
+        setCurrent(_current->getNext());
+       }
+        bool find(const ed::Municipio &item);
+        void insert(const ed::Municipio &item);
+	// COMPLETAR EL RESTO DE MODIFICADORES PÚBLICOS
+
+
 
 	
 

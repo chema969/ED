@@ -26,16 +26,8 @@ int ed::ListaDoblementeEnlazadaOrdenadaMunicipios::nItems(){
 bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::isLastItem(){
         #ifndef NDEBUG
 		assert(!isEmpty());
-<<<<<<< HEAD
 	#endif //NDEBUG
     if(_current->getNext()!=NULL) return true;
-=======
-	#endif //NDEBUG	
-    ed::NodoDoblementeEnlazadoMunicipio *it=getHead();
-       while(it->getNext()!=NULL)
-         it=it->getNext();
-    if(it==getCurrent()) return true;
->>>>>>> 56cd29cccf5c73c646bc18b9602f2057c0d09349
     return false;
 }
 
@@ -57,7 +49,7 @@ ed::Municipio const &ed::ListaDoblementeEnlazadaOrdenadaMunicipios::getNextItem(
        return it->getItem();
 }
 
-<<<<<<< HEAD
+
 void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::gotoLast(){
        #ifndef NDEBUG
 		assert(!isEmpty());
@@ -70,7 +62,7 @@ void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::gotoLast(){
 
 bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::find(const ed::Municipio &item){
       ed::NodoDoblementeEnlazadoMunicipio *it=getHead();
-      const ed::Municipio aux;
+      ed::Municipio aux;
         while(it->getNext()!=NULL){
          aux=it->getItem();
            if(item.getNombre()==aux.getNombre()){
@@ -79,21 +71,35 @@ bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::find(const ed::Municipio &it
              }
            it=it->getNext();
             }
-         
+     return false;
        
 }
-=======
 
-void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::gotoLast(){
-               #ifndef NDEBUG
-			assert(!isEmpty());
-		#endif
-               ed::NodoDoblementeEnlazadoMunicipio *it=getHead();
-              while(it->getNext()!=NULL)
-               it=it->getNext();
-               setCurrent(it);
-              #ifndef NDEBUG
-			assert(_current==_head);
-		#endif
-    }
->>>>>>> 56cd29cccf5c73c646bc18b9602f2057c0d09349
+
+void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::insert(const ed::Municipio &item){
+       ed::NodoDoblementeEnlazadoMunicipio *nodo= new ed::NodoDoblementeEnlazadoMunicipio(item,NULL,NULL);
+       ed::NodoDoblementeEnlazadoMunicipio *it=getHead();
+       ed::NodoDoblementeEnlazadoMunicipio *it2=_head->getNext();
+       bool he_insertado=false;
+       ed::Municipio itItem, it2Item;   
+       itItem=it->getItem();
+         if(itItem.getNombre()>item.getNombre()){
+           it->setPrevious(nodo);
+           nodo->setNext(it);
+           he_insertado=true;
+           }
+       while((!he_insertado)&&(it2->getNext()!=NULL)){
+          itItem=it->getItem();
+          it2Item=it2->getItem();
+            if((itItem.getNombre()<item.getNombre())&&(it2Item.getNombre()>item.getNombre())){
+               nodo->setNext(it2);
+               nodo->setPrevious(it);
+               it->setNext(nodo);
+               it2->setPrevious(nodo);
+               he_insertado=true;
+            }
+           it=it->getNext();
+          it2=it2->getNext();
+         }
+}
+       
