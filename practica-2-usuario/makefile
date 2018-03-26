@@ -33,35 +33,35 @@ ndebug: objetivo
 # Primer objetivo 
 $(NAME).exe: $(OBJECTS)
 			@echo "Generando " $@
-			@g++ $^ -o $@
+			@g++-4.9 $^ -o $@
 
 #
 $(NAME).o: $(NAME).cpp $(INCLUDES)
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 #
 funcionesAuxiliares.o: funcionesAuxiliares.cpp $(INCLUDES)
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 #
 Provincia.o: Provincia.cpp Provincia.hpp \
 			ListaDoblementeEnlazadaOrdenadaMunicipios.hpp ListaOrdenadaMunicipiosInterfaz.hpp \
 			Municipio.hpp 
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 #
 Municipio.o: Municipio.cpp Municipio.hpp
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 
 #
 ListaDoblementeEnlazadaOrdenadaMunicipios.o: ListaDoblementeEnlazadaOrdenadaMunicipios.cpp   $(INCLUDESLIST)
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 
 

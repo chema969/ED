@@ -108,7 +108,7 @@ namespace ed {
 	*/
 	~ListaDoblementeEnlazadaOrdenadaMunicipios ()
      {
-
+       removeAll();
      }
 
 
@@ -126,23 +126,23 @@ namespace ed {
 		return false;
 	}
 
-	int nItems();
-        inline bool isFirstItem(){	 
+	int nItems() const;
+        inline bool isFirstItem() const{	 
                 #ifndef NDEBUG
 			assert(!isEmpty());
 		#endif //NDEBUG	
                 if(getCurrent()==getHead())return true;
 		return false;
           }
-        bool isLastItem();
-        inline ed::Municipio const & getCurrentItem(){
+        bool isLastItem() const;
+        inline ed::Municipio const & getCurrentItem() const{
                  #ifndef NDEBUG
 			assert(!isEmpty());
 		#endif //NDEBUG	
 		return _current->getItem();
         }
-        ed::Municipio const &getPreviousItem();
-        ed::Municipio const &getNextItem();
+        ed::Municipio const &getPreviousItem()const;
+        ed::Municipio const &getNextItem()const;
     //! \name Modificadores públicos
 
  
@@ -174,6 +174,10 @@ namespace ed {
        }
         bool find(const ed::Municipio &item);
         void insert(const ed::Municipio &item);
+        void remove();
+        void removeAll(){
+                setCurrent(_head);
+        while(_current!=NULL) remove();}
 	// COMPLETAR EL RESTO DE MODIFICADORES PÚBLICOS
 
 

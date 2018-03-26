@@ -68,8 +68,19 @@ class Provincia
 	//!	\name Observadores
     inline std::string getNombre()const{return _nombre;}
     inline int getCodigo()const{return _codigo;}
-    
+    inline bool hayMunicipios()const{
+            if (_listaMunicipios.isEmpty())return false;
+            return true;
+            }                            
+    inline int getNumeroMunicipios()const{return _listaMunicipios.nItems();}
+    inline bool existeMunicipio(std::string cadena){ed::Municipio aux(cadena);
+                                                   return _listaMunicipios.find(aux);}
 
+    inline ed::Municipio getMunicipio(std::string cadena){
+                                            #ifndef NDEBUG
+			                           assert(existeMunicipio(cadena));
+		                              #endif
+                                                   return _listaMunicipios.getCurrentItem();}     
 	/////////////////////////////////////////////////////////////////////
 
 	//!	\name Modificadores
