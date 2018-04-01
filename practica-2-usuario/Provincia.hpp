@@ -77,21 +77,23 @@ class Provincia
                                                    return _listaMunicipios.find(aux);}
 
     inline ed::Municipio getMunicipio(std::string cadena){
-                                            #ifndef NDEBUG
-			                           assert(existeMunicipio(cadena));
-		                              #endif
-                                                   return _listaMunicipios.getCurrentItem();}     
+                                                   if(existeMunicipio(cadena))
+                                                   return _listaMunicipios.getCurrentItem();}   
+     int getTotalHombres(); 
+     int getTotalMujeres();
+     inline int getTotalHabitantes(){ return getTotalHombres()+getTotalMujeres();}
 	/////////////////////////////////////////////////////////////////////
 
 	//!	\name Modificadores
-
-
-
+    inline void setNombre(std::string nombre){_nombre=nombre;}
+    inline void setCodigo(int codigo){_codigo=codigo;}
+    void insertarMunicipio(ed::Municipio municipio);
+    void borrarMunicipio(std::string nombre);
+    inline void borrarTodosLosMunicipios(){_listaMunicipios.removeAll();}
 	/////////////////////////////////////////////////////////////////////
 
 	//! \name Función de escritura de la clase Provincia
-
-
+    void escribirMunicipios();
 
 	/////////////////////////////////////////////////////////////////////
 

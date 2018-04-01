@@ -41,7 +41,7 @@ namespace ed {
 	private:
 		ed::NodoDoblementeEnlazadoMunicipio *_head;    //!< \brief puntero al primer nodo de la lista
 		ed::NodoDoblementeEnlazadoMunicipio *_current; //!< \brief puntero al nodo current de la lista
-
+                int _nItems;
     // \name Observadores privados 
 
     inline ed::NodoDoblementeEnlazadoMunicipio * getHead() const
@@ -90,6 +90,7 @@ namespace ed {
 	*/
 	inline ListaDoblementeEnlazadaOrdenadaMunicipios()
     {
+        _nItems=0;
 	_head=NULL;
         _current=NULL;
 		 #ifndef NDEBUG
@@ -108,7 +109,7 @@ namespace ed {
 	*/
 	~ListaDoblementeEnlazadaOrdenadaMunicipios ()
      {
-       removeAll();
+       //removeAll();
      }
 
 
@@ -177,7 +178,11 @@ namespace ed {
         void remove();
         void removeAll(){
                 setCurrent(_head);
-        while(_current!=NULL) remove();}
+        while(_current!=NULL) remove();
+        #ifndef NDEBUG
+			assert(isEmpty());
+		#endif 
+            }
 	// COMPLETAR EL RESTO DE MODIFICADORES PÚBLICOS
 
 

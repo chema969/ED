@@ -22,22 +22,69 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // OSBSERVADORES
+int ed::Provincia::getTotalHombres(){
+    ed::Municipio aux;
+    int sum=0;
+   _listaMunicipios.gotoHead();
+      while(!_listaMunicipios.isLastItem()){
+          aux=_listaMunicipios.getCurrentItem();
+          sum=sum+aux.getHombres();
+          _listaMunicipios.gotoNext();
+           }
+   aux=_listaMunicipios.getCurrentItem();
+   sum=sum+aux.getHombres();
+   return sum;
+ }
 
-
+int ed::Provincia::getTotalMujeres(){
+    ed::Municipio aux;
+    int sum=0;
+   _listaMunicipios.gotoHead();
+      while(!_listaMunicipios.isLastItem()){
+          aux=_listaMunicipios.getCurrentItem();
+          sum=sum+aux.getMujeres();
+          _listaMunicipios.gotoNext();
+           }
+   aux=_listaMunicipios.getCurrentItem();
+   sum=sum+aux.getMujeres();
+   return sum;
+ }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
 // MODIFICADORES
+void ed::Provincia::insertarMunicipio(ed::Municipio municipio){
+  /* #ifndef NDEBUG
+		assert(!existeMunicipio(municipio.getNombre()));
+	#endif*/
+   _listaMunicipios.insert(municipio);
+   /* #ifndef NDEBUG
+		assert(existeMunicipio(municipio.getNombre()));
+	#endif*/
+}
 
-
+void ed::Provincia::borrarMunicipio(std::string nombre){
+	if(existeMunicipio(nombre)) _listaMunicipios.remove();
+	#ifndef NDEBUG
+		assert(!existeMunicipio(nombre));
+	#endif
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-// FUNCIÓN DE ESCRITURA
-
-
-
+// FUNCIÓN DE ESCRITUR
+void ed::Provincia::escribirMunicipios(){
+std::cout<<_nombre<<" "<<_codigo<<std::endl;
+ed::Municipio aux;
+_listaMunicipios.gotoHead();
+   while(!_listaMunicipios.isLastItem()){
+     aux=_listaMunicipios.getCurrentItem();
+     std::cout<<aux<<std::endl;
+     _listaMunicipios.gotoNext();}
+aux=_listaMunicipios.getCurrentItem();
+std::cout<<aux<<std::endl;
+}
 /////////////////////////////////////////////////////////////////////////////////////////
 
 // OPERACIONES CON FICHEROS
