@@ -75,6 +75,8 @@ bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::find(const ed::Municipio &it
            it=it->getNext();            }
      setCurrent(it);
      if(it->getItem()==item)return true;
+	setCurrent(it->getPrevious());
+		
      return false;
        
 }
