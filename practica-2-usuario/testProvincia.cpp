@@ -53,12 +53,12 @@ std::cout << "Insertar Zuheros" << std::endl;
 
 	provincia.escribirMunicipios();
 
-	/*std::cout << "Se borra un municipio para controlar otro caso: Baena" << std::endl;
+	std::cout << "Se borra un municipio para controlar otro caso: Baena" << std::endl;
 	provincia.borrarMunicipio("Baena");
     std::cout << std::endl;
 
 	provincia.escribirMunicipios();
-*/
+
     std::cout << "Insertar Luque" << std::endl;
 	municipio.setNombre("Luque");
 	provincia.insertarMunicipio(municipio);
@@ -73,19 +73,12 @@ std::cout << "Insertar Zuheros" << std::endl;
 
 	provincia.escribirMunicipios();
 
- /*  std::cout << "Insertar Zuheros" << std::endl;
-	municipio.setNombre("Zuheros");
-	provincia.insertarMunicipio(municipio);
-    std::cout << std::endl;
-
-	provincia.escribirMunicipios();
-
     std::cout << "Insertar Santa Eufemia" << std::endl;
 	municipio.setNombre("Santa Eufemia");
 	provincia.insertarMunicipio(municipio);
     std::cout << std::endl; 
 
-	provincia.escribirMunicipios();*/
+	provincia.escribirMunicipios();
 
     std::cout << "Insertar Montilla" << std::endl;
 	municipio.setNombre("Montilla");
@@ -95,14 +88,8 @@ std::cout << "Insertar Zuheros" << std::endl;
 	provincia.escribirMunicipios();
 
 
-    std::cout << "Insertar Josrr" << std::endl;
-	municipio.setNombre("Josrr");
-	provincia.insertarMunicipio(municipio);
-    std::cout << std::endl;
-
-	provincia.escribirMunicipios();
 	std::cout << "##############################" << std::endl << std::endl<< std::endl;
-/*
+
 	std::cout << "Se borran los municipios" << std::endl<< std::endl;
 
     std::cout << "Borrar Luque" << std::endl;
@@ -139,7 +126,7 @@ std::cout << "Insertar Zuheros" << std::endl;
 	provincia.borrarMunicipio("Cabra");
     std::cout << std::endl;
 
-	provincia.escribirMunicipios();*/
+	provincia.escribirMunicipios();
 
 	return 0;
 }

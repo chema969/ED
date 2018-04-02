@@ -58,7 +58,7 @@ void ed::Provincia::insertarMunicipio(ed::Municipio municipio){
 		assert(!existeMunicipio(municipio.getNombre()));
 	#endif*/
    _listaMunicipios.insert(municipio);
-   /* #ifndef NDEBUG
+  /* #ifndef NDEBUG
 		assert(existeMunicipio(municipio.getNombre()));
 	#endif*/
 }
@@ -76,6 +76,7 @@ void ed::Provincia::borrarMunicipio(std::string nombre){
 // FUNCIÓN DE ESCRITUR
 void ed::Provincia::escribirMunicipios(){
 std::cout<<_nombre<<" "<<_codigo<<std::endl;
+if(!_listaMunicipios.isEmpty()){
 ed::Municipio aux;
 _listaMunicipios.gotoHead();
    while(!_listaMunicipios.isLastItem()){
@@ -84,6 +85,7 @@ _listaMunicipios.gotoHead();
      _listaMunicipios.gotoNext();}
 aux=_listaMunicipios.getCurrentItem();
 std::cout<<aux<<std::endl;
+}
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 

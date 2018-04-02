@@ -76,7 +76,22 @@ namespace ed {
 		#endif //NDEBUG		
 	}
 
+    inline void insertLast(ed::NodoDoblementeEnlazadoMunicipio *nodo){
+         _current->setNext(nodo);
+             nodo->setPrevious(_current);}
 
+
+    inline void insertFirst(ed::NodoDoblementeEnlazadoMunicipio *nodo){
+         _current->setPrevious(nodo);
+               nodo->setNext(_current);
+               setHead(nodo);}
+
+    inline void insertBetween(ed::NodoDoblementeEnlazadoMunicipio *nodo){
+          ed::NodoDoblementeEnlazadoMunicipio *aux=_current->getPrevious();
+               aux->setNext(nodo);
+               _current->setPrevious(nodo);
+               nodo->setPrevious(aux);
+               nodo->setNext(_current);}
 	//! \name  Métodos públicos
 
 	public:
@@ -109,7 +124,7 @@ namespace ed {
 	*/
 	~ListaDoblementeEnlazadaOrdenadaMunicipios ()
      {
-       //removeAll();
+       removeAll();
      }
 
 
@@ -132,7 +147,7 @@ namespace ed {
                 #ifndef NDEBUG
 			assert(!isEmpty());
 		#endif //NDEBUG	
-                if(getCurrent()==getHead())return true;
+                if(_current->getItem()==_head->getItem())return true;
 		return false;
           }
         bool isLastItem() const;

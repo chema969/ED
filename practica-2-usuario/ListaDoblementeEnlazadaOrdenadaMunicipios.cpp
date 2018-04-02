@@ -65,69 +65,62 @@ bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::find(const ed::Municipio &it
            if(_head->getItem()==item) return true;
            else return false;
            }
+       if(item==it->getItem()){setCurrent(it);return true;}
+       if(item<it->getItem()){
+                             setCurrent(it);
+                              return false; }
+       it=it->getNext();
         while((it->getNext()!=NULL)){
-         aux=it->getItem(); 
-           if(item<aux){ setCurrent(it); if(!isFirstItem())setCurrent(it->getPrevious()); return false; }
-           if(item==aux){
+           if(item==it->getItem()){
               setCurrent(it);
               return true;
              }
-           it=it->getNext();            }
+           if(item<it->getItem()){
+                             setCurrent(it);
+                              return false; }
+             it=it->getNext();    
+                          }
      setCurrent(it);
-     if(it->getItem()==item)return true;
-	setCurrent(it->getPrevious());
-		
-     return false;
-       
+     if(_current->getItem()==item)return true;	
+     return false;   
 }
 
 
 void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::insert(const ed::Municipio &item){
-      /*  #ifndef NDEBUG
-		assert(!find(item));
-	#endif //NDEBUG*/
-       
        int n=nItems();
        ed::NodoDoblementeEnlazadoMunicipio *nodo= new ed::NodoDoblementeEnlazadoMunicipio(item,NULL,NULL);
-       find(item);
+       if(!find(item)){
        if(isEmpty())
           setHead(nodo); 
       else{     
-       std::cout<<"current es ahora "<<_current->getItem()<<std::endl;     
        if(n==1){
-           std::cout<<"Hay solo un elemento"<<std::endl;
-           if(nodo->getItem()<_head->getItem()){
-                  std::cout<<"se insertara al final"<<std::endl;
-                  _head->setNext(nodo);
-                  nodo->setPrevious(_head);
-                }  
-           else{std::cout<<"se insertara al principio"<<std::endl;
-               _head->setPrevious(nodo);
-               nodo->setNext(_head);
-               setHead(nodo);
-              }
+           if(_head->getItem()<nodo->getItem())
+             insertLast(nodo);
+                
+           else
+            insertFirst(nodo);
+              
           }
-        else{      
+        else{
+         if(n==2){
+            ed::NodoDoblementeEnlazadoMunicipio *aux=_head->getNext();
+            if(item<_head->getItem()) insertFirst(nodo);
+            else if(item<aux->getItem()){setCurrent(_head->getNext()); insertBetween(nodo);}
+            else insertLast(nodo);}
+         else{    
           if(isLastItem()){
-         std::cout<<"current es ahora "<<_current->getItem()<<",se inserta al final"<<std::endl;
-             _current->setNext(nodo);
-             nodo->setPrevious(_current);
-          }
+             if(item<_current->getItem())insertBetween(nodo);
+             else insertLast(nodo);
+           }
           else{
              if(isFirstItem()){
-               std::cout<<"se insertara al principio"<<std::endl;
-               _current->setPrevious(nodo);
-               nodo->setNext(_current);
-               setHead(nodo);
+               insertFirst(nodo);
               }
              else{
-               ed::NodoDoblementeEnlazadoMunicipio *aux=_current->getNext();
-               aux->setPrevious(nodo);
-               _current->setNext(nodo);
-               nodo->setPrevious(_current);
-               nodo->setNext(aux);
+               insertBetween(nodo);
              }
            }
+         }
          }
         }
        setCurrent(nodo);
@@ -137,20 +130,20 @@ void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::insert(const ed::Municipio &
                 assert(!isEmpty()); 
 	#endif //NDEBUG
 }
-       
+}
 
 void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::remove(){
     #ifndef NDEBUG
 	assert(!isEmpty());
     #endif //NDEBUG 
     int n=nItems();
-    if(n==1)  delete _current;
+    if(n==1) { _head=NULL;_current=NULL;}
     else{
         if(isFirstItem()){
                ed::NodoDoblementeEnlazadoMunicipio *aux=_current->getNext();
                aux->setPrevious(NULL);
                delete _current;
-                if(!isEmpty()) setCurrent(aux);
+                if(!isEmpty()){ setCurrent(aux); setHead(aux);}
               }
          else{
             if(isLastItem()){
