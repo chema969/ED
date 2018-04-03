@@ -98,8 +98,8 @@ class Provincia
 	/////////////////////////////////////////////////////////////////////
 
 	//! Operaciones con ficheros
-
-
+    bool cargarFichero(std::string nombre);
+    bool grabarFichero(std::string nombre);
 }; //Fin de la clase  Provincia
 
 

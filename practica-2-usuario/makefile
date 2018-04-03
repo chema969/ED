@@ -1,4 +1,4 @@
-NAME=principalProvincia
+NAME=testProvincia
 
 #
 OBJECTS = $(NAME).o funcionesAuxiliares.o Provincia.o Municipio.o \
@@ -11,10 +11,10 @@ CPPFLAGS = -c -g -Wall -ansi -O2
 INCLUDESLIST = ListaDoblementeEnlazadaOrdenadaMunicipios.hpp \
 				ListaOrdenadaMunicipiosInterfaz.hpp \
 				NodoDoblementeEnlazadoMunicipio.hpp  NodoMunicipioInterfaz.hpp \
-				Municipio.hpp\
+				Municipio.hpp  \
 				macros.hpp
 
-INCLUDES = funcionesAuxiliares.hpp \
+INCLUDES = Provincia.hpp \
 			$(INCLUDESLIST)
 
 # Macros predefinidas
@@ -41,14 +41,9 @@ $(NAME).o: $(NAME).cpp $(INCLUDES)
 			@g++-4.9 $(CPPFLAGS) $<
 
 #
-funcionesAuxiliares.o: funcionesAuxiliares.cpp $(INCLUDES)
-			@echo "Compilando " $<
-			@g++-4.9 $(CPPFLAGS) $<
-
-#
-Provincia.o: Provincia.cpp Provincia.hpp \
+Provincia.o: Provincia.cpp Provincia.hpp  \
 			ListaDoblementeEnlazadaOrdenadaMunicipios.hpp ListaOrdenadaMunicipiosInterfaz.hpp \
-			Municipio.hpp 
+			Municipio.hpp  
 			@echo "Compilando " $<
 			@g++-4.9 $(CPPFLAGS) $<
 
