@@ -10,7 +10,7 @@
 //Para los flujos de entrada/salida en ficheros.
 #include <fstream>  
 #include <iostream>
-
+#include <cstdlib>
 // Para comprobar las pre y post condiciones
 #include <cassert>
 
@@ -109,16 +109,16 @@ bool ed::Provincia::grabarFichero(std::string nombre){
 bool ed::Provincia::cargarFichero(std::string nombre){
     std::ifstream fichero;
     fichero.open(nombre.c_str());
+      std::string cadena;
+      std::getline(fichero,cadena,' ');
+      setCodigo(atoi(cadena.c_str()));
+      std::getline(fichero,cadena,'\n');
+      setNombre(cadena);
     if( (fichero.rdstate() & std::ifstream::failbit ) != 0 )return false;
-    _listaMunicipios.gotoHead();
     ed::Municipio aux;
-   while(!_listaMunicipios.isLastItem()){
-     ed::Municipio aux=_listaMunicipios.getCurrentItem();
-     fichero>>aux>>"\n";
-     _listaMunicipios.gotoNext();}
-     aux=_listaMunicipios.getCurrentItem();
-     fichero>>aux>>"\n";
-     fichero.close();
+   while(fichero>>aux){
+        _listaMunicipios.insert(aux);     
+     }
      return true;
 }
 
