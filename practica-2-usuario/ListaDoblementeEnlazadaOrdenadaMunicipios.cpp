@@ -137,7 +137,10 @@ void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::remove(){
 	assert(!isEmpty());
     #endif //NDEBUG 
     int n=nItems();
-    if(n==1) { _head=NULL;_current=NULL;}
+    if(n==1) { 
+     ed::NodoDoblementeEnlazadoMunicipio *aux=_head;
+     _head=NULL;_current=NULL;
+      delete aux;}
     else{
         if(isFirstItem()){
                ed::NodoDoblementeEnlazadoMunicipio *aux=_current->getNext();

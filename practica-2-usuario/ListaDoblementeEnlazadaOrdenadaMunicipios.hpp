@@ -193,7 +193,7 @@ namespace ed {
         void remove();
         void removeAll(){
                 setCurrent(_head);
-        while(_current!=NULL) remove();
+        while(!isEmpty()) remove();
         #ifndef NDEBUG
 			assert(isEmpty());
 		#endif 

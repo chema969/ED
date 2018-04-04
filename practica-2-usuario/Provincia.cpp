@@ -54,13 +54,13 @@ int ed::Provincia::getTotalMujeres(){
 
 // MODIFICADORES
 void ed::Provincia::insertarMunicipio(ed::Municipio municipio){
-  /* #ifndef NDEBUG
+   #ifndef NDEBUG
 		assert(!existeMunicipio(municipio.getNombre()));
-	#endif*/
+	#endif
    _listaMunicipios.insert(municipio);
-  /* #ifndef NDEBUG
+   #ifndef NDEBUG
 		assert(existeMunicipio(municipio.getNombre()));
-	#endif*/
+	#endif
 }
 
 void ed::Provincia::borrarMunicipio(std::string nombre){
