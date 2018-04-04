@@ -65,11 +65,7 @@ bool ed::ListaDoblementeEnlazadaOrdenadaMunicipios::find(const ed::Municipio &it
            if(_head->getItem()==item) return true;
            else return false;
            }
-       if(item==it->getItem()){setCurrent(it);return true;}
-       if(item<it->getItem()){
-                             setCurrent(it);
-                              return false; }
-       it=it->getNext();
+      
         while((it->getNext()!=NULL)){
            if(item==it->getItem()){
               setCurrent(it);
@@ -101,12 +97,7 @@ void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::insert(const ed::Municipio &
             insertFirst(nodo);
               
           }
-        else{
-         if(n==2){
-            ed::NodoDoblementeEnlazadoMunicipio *aux=_head->getNext();
-            if(item<_head->getItem()) insertFirst(nodo);
-            else if(item<aux->getItem()){setCurrent(_head->getNext()); insertBetween(nodo);}
-            else insertLast(nodo);}
+       
          else{    
           if(isLastItem()){
              if(item<_current->getItem())insertBetween(nodo);
@@ -120,7 +111,6 @@ void ed::ListaDoblementeEnlazadaOrdenadaMunicipios::insert(const ed::Municipio &
                insertBetween(nodo);
              }
            }
-         }
          }
         }
        setCurrent(nodo);

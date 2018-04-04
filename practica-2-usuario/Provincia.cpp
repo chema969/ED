@@ -58,7 +58,8 @@ void ed::Provincia::insertarMunicipio(ed::Municipio municipio){
 		assert(!existeMunicipio(municipio.getNombre()));
 	#endif
    _listaMunicipios.insert(municipio);
-   #ifndef NDEBUG
+
+  #ifndef NDEBUG
 		assert(existeMunicipio(municipio.getNombre()));
 	#endif
 }
@@ -90,5 +91,36 @@ std::cout<<aux<<std::endl;
 /////////////////////////////////////////////////////////////////////////////////////////
 
 // OPERACIONES CON FICHEROS
+
+bool ed::Provincia::grabarFichero(std::string nombre){
+    std::ofstream fichero;
+    fichero.open(nombre.c_str());
+    if( (fichero.rdstate() & std::ofstream::failbit ) != 0 )return false;
+    fichero<<_nombre<<" "<<_codigo<<"\n";
+    _listaMunicipios.gotoHead();
+   while(!_listaMunicipios.isLastItem()){
+     fichero<<_listaMunicipios.getCurrentItem()<<"\n";
+     _listaMunicipios.gotoNext();}
+     fichero<<_listaMunicipios.getCurrentItem()<<"\n";
+     fichero.close();
+     return true;
+}
+
+bool ed::Provincia::cargarFichero(std::string nombre){
+    std::ifstream fichero;
+    fichero.open(nombre.c_str());
+    if( (fichero.rdstate() & std::ifstream::failbit ) != 0 )return false;
+    _listaMunicipios.gotoHead();
+    ed::Municipio aux;
+   while(!_listaMunicipios.isLastItem()){
+     ed::Municipio aux=_listaMunicipios.getCurrentItem();
+     fichero>>aux>>"\n";
+     _listaMunicipios.gotoNext();}
+     aux=_listaMunicipios.getCurrentItem();
+     fichero>>aux>>"\n";
+     fichero.close();
+     return true;
+}
+
 
 
