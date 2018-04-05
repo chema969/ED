@@ -96,7 +96,7 @@ bool ed::Provincia::grabarFichero(std::string nombre){
     std::ofstream fichero;
     fichero.open(nombre.c_str());
     if( (fichero.rdstate() & std::ofstream::failbit ) != 0 )return false;
-    fichero<<_nombre<<" "<<_codigo<<"\n";
+    fichero<<_codigo<<" "<<_nombre<<"\n";
     _listaMunicipios.gotoHead();
    while(!_listaMunicipios.isLastItem()){
      fichero<<_listaMunicipios.getCurrentItem()<<"\n";
