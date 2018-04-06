@@ -78,9 +78,11 @@ int ed::menu()
 	PLACE(posicion++,10);
 	std::cout << "[10] Borrar un municipio";
 
-	//////////////////////////////////////////////////////////////////////////////
+        PLACE(posicion++,10);
+	std::cout << "[11] Mostrar las provincias que empiecen por una letra";
+        //////////////////////////////////////////////////////////////////////////////
 	posicion++;
-
+         
 	PLACE(posicion++,10);
 	std::cout << BIRED << "[0] Salir";
 
@@ -286,5 +288,20 @@ void ed::borrarMunicipioDeProvincia(ed::Provincia &provincia)
 }
 
 
+
+
+void ed::mostrarProvinciaLetra(ed::Provincia &provincia)
+{
+     std::cout<<BIPURPLE<<"Introduzca un solo caracter (en mayuscula)"<<RESET<<std::endl; 
+     std::string a;
+     std::cin>>a;
+     std::cin.ignore();
+     while(a.size()!=1){
+        std::cout<<BIPURPLE<<"Introduzca "<<BIRED<<"un solo caracter "<<BIPURPLE"(en mayuscula)"<<RESET<<std::endl; 
+        std::cin>>a;
+        std::cin.ignore();
+       }
+     provincia.getMunicipiosPrimeraLetra(a);
+    }
 
 

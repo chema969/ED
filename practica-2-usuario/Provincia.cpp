@@ -50,6 +50,7 @@ int ed::Provincia::getTotalMujeres(){
    return sum;
  }
 
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 // MODIFICADORES
@@ -74,7 +75,7 @@ void ed::Provincia::borrarMunicipio(std::string nombre){
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-// FUNCIÓN DE ESCRITUR
+// FUNCIÓN DE ESCRITURA
 void ed::Provincia::escribirMunicipios(){
 std::cout<<_nombre<<" "<<_codigo<<std::endl;
 if(!_listaMunicipios.isEmpty()){
@@ -87,6 +88,17 @@ _listaMunicipios.gotoHead();
 aux=_listaMunicipios.getCurrentItem();
 std::cout<<aux<<std::endl;
 }
+}
+
+
+void ed::Provincia::getMunicipiosPrimeraLetra(std::string a){
+   if(a.size()==1){
+    _listaMunicipios.find(a);
+    while((_listaMunicipios.getCurrentItem().getNombre().find_first_of(a)==0)&&(!_listaMunicipios.isLastItem())){
+        std::cout<<_listaMunicipios.getCurrentItem()<<std::endl;
+        _listaMunicipios.gotoNext(); 
+        }
+    }
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 
