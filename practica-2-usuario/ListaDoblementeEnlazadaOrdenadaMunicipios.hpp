@@ -41,14 +41,30 @@ namespace ed {
 	private:
 		ed::NodoDoblementeEnlazadoMunicipio *_head;    //!< \brief puntero al primer nodo de la lista
 		ed::NodoDoblementeEnlazadoMunicipio *_current; //!< \brief puntero al nodo current de la lista
-                int _nItems;
+                int _nItems; //!< \brief numero de items de la lista
     // \name Observadores privados 
 
+
+/*!
+		\brief  Devuelve la cabeza de la lista
+		\note   Función inline
+		\note   Función de tipo "const": no puede modificar al objeto actual
+		\note   Función privada
+                \return La cabeza de la lista
+    */
     inline ed::NodoDoblementeEnlazadoMunicipio * getHead() const
 	{
 		return this->_head;
 	}
 
+
+/*!
+		\brief  Devuelve el current de la lista
+		\note   Función inline
+		\note   Función de tipo "const": no puede modificar al objeto actual
+		\note   Función privada
+                \return El current de la lista
+    */
 	inline ed::NodoDoblementeEnlazadoMunicipio * getCurrent() const
 	{
 		return this->_current;
@@ -56,6 +72,12 @@ namespace ed {
 
     //! \name Modificadores privados 
 
+/*!
+		\brief  Modificador del head de la lista
+                \param head Nueva cabeza
+		\note   Función inline
+		\note   Función privada
+    */
 	inline void setHead(ed::NodoDoblementeEnlazadoMunicipio *head) 
 	{
 		this->_head = head;
@@ -66,6 +88,13 @@ namespace ed {
 		#endif //NDEBUG		
 	}
 
+
+/*!
+		\brief  Modificador del current de la lista
+                \param current Nuevo current
+		\note   Función inline
+		\note   Función privada
+    */
     inline void setCurrent(ed::NodoDoblementeEnlazadoMunicipio *current) 
 	{
 		this->_current = current;
@@ -76,22 +105,56 @@ namespace ed {
 		#endif //NDEBUG		
 	}
 
+
+
+/*!
+		\brief  Inserta un nuevo elemento al final de la lista
+                \param nodo Nodo a insertar al final
+		\note   Función inline
+		\note   Función privada
+                \pre isLastItem()==verdadero
+                \pre lastItem<nodo
+                \post isLastItem()==verdadero
+                \post old.LastItem==LastItem->getPrevious()
+    */
     inline void insertLast(ed::NodoDoblementeEnlazadoMunicipio *nodo){
          _current->setNext(nodo);
              nodo->setPrevious(_current);}
 
-
+/*!
+		\brief  Inserta un nuevo elemento al principio de la lista
+                \param nodo Nodo a insertar al principio
+		\note   Función inline
+		\note   Función privada
+                \pre isFirstItem()==verdadero
+                \post getHead()==nodo
+                \post old.getHead()==getHead()->getNext()
+    */
     inline void insertFirst(ed::NodoDoblementeEnlazadoMunicipio *nodo){
          _current->setPrevious(nodo);
                nodo->setNext(_current);
                setHead(nodo);}
 
+
+/*!
+		\brief  Inserta un nuevo elemento en medio de la lista
+                \param nodo Nodo a insertar
+		\note   Función inline
+		\note   Función privada
+                \pre isFirstItem()==falso
+                \pre si isLastIten()==verdadero, entonces lastItem>nodo
+                \post old.getCurrent()->getPrevious()->getNext()==nodo
+                \post old.getCurrent()->getPrevious==nodo
+                \post nodo->getPrevious()==old.getCurrent()->getPrevious()
+                \post nodo->getNext()==old.getCurrent()
+    */
     inline void insertBetween(ed::NodoDoblementeEnlazadoMunicipio *nodo){
           ed::NodoDoblementeEnlazadoMunicipio *aux=_current->getPrevious();
                aux->setNext(nodo);
                _current->setPrevious(nodo);
                nodo->setPrevious(aux);
                nodo->setNext(_current);}
+
 	//! \name  Métodos públicos
 
 	public:
@@ -191,7 +254,13 @@ namespace ed {
         bool find(const ed::Municipio &item);
         void insert(const ed::Municipio &item);
         void remove();
-        void removeAll(){
+    
+/*! 
+		\brief Destruye todos los elementos de la lista
+		\note Función codificada en el fichero cpp
+		\post isEmpty() == true
+	*/
+        inline void removeAll(){
                 setCurrent(_head);
         while(!isEmpty()) remove();
         #ifndef NDEBUG

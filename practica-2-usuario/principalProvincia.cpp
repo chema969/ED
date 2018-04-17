@@ -112,7 +112,11 @@ int main(){
 					std::cout << "[10] Borrar un municipio" << std::endl;
 					ed::borrarMunicipioDeProvincia(provincia);
 					break;
-
+                        
+                        case 11: 
+                                        std::cout << "[11] Mostrar las provincias que empiecen por una letra" << std::endl;
+					ed::mostrarProvinciaLetra(provincia);
+					break;
 			//////////////////////////////////////////////////////////////////////////////
 			default:
 				std::cout << BIRED;
