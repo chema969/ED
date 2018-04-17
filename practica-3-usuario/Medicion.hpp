@@ -31,29 +31,50 @@ class Medicion
 {
   //! \name Atributos privados de la clase Medicion
    private: 
-
-		// COMPLETAR EL CÓDIGO E INCLUIR LOS COMENTARIOS DE DOXYGEN
+            
+	     ed::Fecha _fecha;//!< Fecha de la medicion
+             float _precipitaciones;//!< Cantidad de precipitaciones
 
    //! \name Funciones o métodos públicos de la clase Medicion
    public:
 
 	//! \name Constructor de la clase Medicion
 
-		// COMPLETAR EL CÓDIGO E INCLUIR LOS COMENTARIOS DE DOXYGEN
 
+	     Medicion(ed::Fecha fecha=Fecha(1,1,1), float precipitaciones=0.0):_fecha(fecha){
+                            
+                           setPreticipitacion(precipitaciones);
+                            }
+
+
+
+
+ 	     Medicion(ed::Medicion med){
+
+		           setFecha(med.getFecha());
+                           setPreticipitacion(med.getPrecipitacion());
+                         }                    
 	//! \name Observadores: funciones de consulta de la clase Medicion
 
-		// COMPLETAR EL CÓDIGO E INCLUIR LOS COMENTARIOS DE DOXYGEN
+            ed::Fecha getFecha(){ return _fecha;}
+
+
+            float getPrecipitacion{ return _precipitacion;} 
 
 
 	//! \name Funciones de modificación de la clase Medicion
 
-		// COMPLETAR EL CÓDIGO E INCLUIR LOS COMENTARIOS DE DOXYGEN
-
-
+            void setFecha(ed::Fecha fecha){_fecha(fecha));}
+       
+            void setPrecipitacion(float precipitacion){
+                             #define NDEBUG
+                                 assert(precipitacion>=0.0);
+                             #endif
+                        _precipitaciones=precipitacion;
+                           }
 	//! \name Operadores
    
-		// COMPLETAR EL CÓDIGO E INCLUIR LOS COMENTARIOS DE DOXYGEN
+            bool operator==(ed:: Medición);
 
 
 	//! \name Funciones de lectura y escritura de la clase Medicion
