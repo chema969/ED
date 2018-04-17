@@ -1,3 +1,4 @@
+
 /*! 
    \file Medicion.hpp
    \brief Fichero de la clase Medicion: medición de una estación meteorológica 
@@ -43,44 +44,58 @@ class Medicion
 
 	     Medicion(ed::Fecha fecha=Fecha(1,1,1), float precipitaciones=0.0):_fecha(fecha){
                             
-                           setPreticipitacion(precipitaciones);
+                           setPrecipitacion(precipitaciones);
                             }
 
 
 
 
- 	     Medicion(ed::Medicion med){
+ 	     Medicion(Medicion &med){
 
 		           setFecha(med.getFecha());
-                           setPreticipitacion(med.getPrecipitacion());
+                           setPrecipitacion(med.getPrecipitacion());
                          }                    
 	//! \name Observadores: funciones de consulta de la clase Medicion
 
-            ed::Fecha getFecha(){ return _fecha;}
+            inline ed::Fecha getFecha(){ return _fecha;}
 
 
-            float getPrecipitacion{ return _precipitacion;} 
+            float getPrecipitacion(){ return _precipitaciones;} 
 
 
 	//! \name Funciones de modificación de la clase Medicion
 
-            void setFecha(ed::Fecha fecha){_fecha(fecha));}
+            inline void setFecha(ed::Fecha fecha){_fecha=fecha;}
        
-            void setPrecipitacion(float precipitacion){
-                             #define NDEBUG
+            inline void setPrecipitacion(float precipitacion){
+                             #ifndef NDEBUG
                                  assert(precipitacion>=0.0);
                              #endif
                         _precipitaciones=precipitacion;
                            }
 	//! \name Operadores
    
-            bool operator==(ed:: Medición);
+            inline bool operator==(ed::Medicion &medicion){
+                         if(this->getFecha()==medicion.getFecha()) 
+                                 return true;
+                         else
+                                 return false;
+                         }
 
-
+           inline ed::Medicion operator=(ed::Medicion &medicion){
+                        this->setFecha(medicion.getFecha());
+                        this->setPrecipitacion(medicion.getPrecipitacion());
+                        return *this;                    
+                           }
 	//! \name Funciones de lectura y escritura de la clase Medicion
 
-		// COMPLETAR EL CÓDIGO E INCLUIR LOS COMENTARIOS DE DOXYGEN
-
+	   inline void leerMedicion(){ed::Medicion aux;
+                                       //aux=*this;
+                                       std::cout<<aux;}
+ //          inline void escribirMedicion(){std::cin>>*this;}
+                        
+         friend ostream &operator<<(ostream &stream, ed::Medicion const &medicion);
+         friend istream &operator>>(istream &stream, ed::Medicion &medicion);
 
 
 }; // Fin de la definición de la clase Medicion
@@ -88,8 +103,7 @@ class Medicion
 
    //! \name Funciones externas de la clase Medicion: sobrecarga de los operadores de flujo
 
-		// COMPLETAR EL CÓDIGO E INCLUIR LOS COMENTARIOS DE DOXYGEN
-
+        
 
 
 } // \brief Fin de namespace ed.

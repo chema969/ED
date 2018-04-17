@@ -26,7 +26,7 @@ namespace ed{
 // Sobrecarga del operador de salida
 ostream &operator<<(ostream &stream, ed::Medicion const &medicion)
 {
-  // COMPLETAR
+  stream<<medicion.getFecha()<<" "<<medicion.getPrecipitacion()<<std::endl;
 
   return stream;
 }
@@ -34,8 +34,11 @@ ostream &operator<<(ostream &stream, ed::Medicion const &medicion)
 // Sobrecarga del operador de entrada
 istream &operator>>(istream &stream, ed::Medicion &medicion)
 {
- // COMPLETAR
-
+  Fecha f;
+  float p;
+  stream>>f>>p;
+  medicion.setFecha(f);
+  medicion.setPrecipitacion(p);
   return stream;
 } 
 
