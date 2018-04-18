@@ -270,7 +270,6 @@ class Fecha
              );
 	}
 
-
 	//! \name Funciones de lectura y escritura de la clase Fecha
 
 	/*! 

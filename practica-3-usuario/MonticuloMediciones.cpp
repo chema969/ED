@@ -6,7 +6,7 @@
 */
 
 //#include <vector>
-
+#include <algorithm>
 #include <cassert>
 
 #include "Medicion.hpp"
@@ -16,8 +16,25 @@
 ////////////////////////////////////////////////////////////////////
 
 // Métodos privados de la clase MonticuloMediciones
-		// COMPLETAR
 
+
+void ed::MonticuloMediciones::shiftUp(int i){
+        #ifndef NDEBUG
+              assert(i>=0);
+              assert(i< size());
+          #endif
+   int padre=getParent(i);
+   if(getElement(padre).getPrecipitacion()>getElement(i).getPrecipitacion()){ 
+             ed::Medicion aux(_vector[i]);
+             _vector[i]=_vector[padre];
+             _vector[padre]=aux;
+             shiftUp(padre);
+             }
+    else{ 
+        return;
+   }
+}
+             
 ////////////////////////////////////////////////////////////////////////////////////7
 
 // Métodos públicos de la clase MonticuloMediciones

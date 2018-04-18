@@ -50,17 +50,17 @@ class Medicion
 
 
 
- 	     Medicion(Medicion &med){
+ 	    Medicion(Medicion const &med){
 
 		           setFecha(med.getFecha());
                            setPrecipitacion(med.getPrecipitacion());
-                         }                    
+                        }                    
 	//! \name Observadores: funciones de consulta de la clase Medicion
 
-            inline ed::Fecha getFecha(){ return _fecha;}
+            inline ed::Fecha getFecha() const{ return _fecha;}
 
 
-            float getPrecipitacion(){ return _precipitaciones;} 
+            float getPrecipitacion() const{ return _precipitaciones;} 
 
 
 	//! \name Funciones de modificación de la clase Medicion
@@ -89,20 +89,26 @@ class Medicion
                            }
 	//! \name Funciones de lectura y escritura de la clase Medicion
 
-	   inline void leerMedicion(){ed::Medicion aux;
-                                       //aux=*this;
-                                       std::cout<<aux;}
- //          inline void escribirMedicion(){std::cin>>*this;}
+	   inline void leerMedicion(){  
+          std::cout<<getFecha()<<" "<<getPrecipitacion()<<std::endl;   }
+     
+ 
+      inline void escribirMedicion(){std::cin>>_fecha;
+                                     std::cout<<"introduce precipitaciones: ";
+                                     std::cin>>_precipitaciones;}
                         
-         friend ostream &operator<<(ostream &stream, ed::Medicion const &medicion);
-         friend istream &operator>>(istream &stream, ed::Medicion &medicion);
+
 
 
 }; // Fin de la definición de la clase Medicion
 
 
    //! \name Funciones externas de la clase Medicion: sobrecarga de los operadores de flujo
+         ostream &operator<<(ostream &stream, Medicion const &medicion);
 
+
+
+         istream &operator>>(istream &stream, Medicion &medicion);
         
 
 

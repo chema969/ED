@@ -13,15 +13,12 @@
 #include "Medicion.hpp"
 
 
-// COMPLETAR
-
-
-////////////////////////////////////////////////////////////////////////////////
-
 
 // Se incluyen los operadores sobrecargados dentro del espacio de nombres de ed
 
 namespace ed{
+
+
 
 // Sobrecarga del operador de salida
 ostream &operator<<(ostream &stream, ed::Medicion const &medicion)
@@ -32,11 +29,13 @@ ostream &operator<<(ostream &stream, ed::Medicion const &medicion)
 }
 
 // Sobrecarga del operador de entrada
-istream &operator>>(istream &stream, ed::Medicion &medicion)
+istream &operator>>(istream &stream, Medicion &medicion)
 {
   Fecha f;
   float p;
-  stream>>f>>p;
+  stream>>f;
+  std::cout<<"introduce precipitaciones: ";
+  stream>>p;
   medicion.setFecha(f);
   medicion.setPrecipitacion(p);
   return stream;
