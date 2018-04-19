@@ -75,7 +75,7 @@ class Medicion
                            }
 	//! \name Operadores
    
-            inline bool operator==(ed::Medicion &medicion){
+            inline bool operator==(ed::Medicion medicion) const{
                          if(this->getFecha()==medicion.getFecha()) 
                                  return true;
                          else

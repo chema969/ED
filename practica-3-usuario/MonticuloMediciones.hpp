@@ -75,6 +75,10 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
                   }
 
           void shiftUp(int i);
+
+          void shiftDown(int i);
+
+          bool has(ed::Medicion m);
 	  /////////////////////////////////////////////////////////////////////////////////////
 
 	//! \name Métodos públicos de la clase MonticuloMediciones
@@ -101,7 +105,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 
 
 
-        ed::Medicion top()const{  
+        inline ed::Medicion top()const{  
                         #ifndef NDEBUG
                         assert(!isEmpty());//No puede estar vacia
                        #endif
@@ -110,25 +114,41 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 
 		//! \name Operaciones de modificación
 
-        void removeAll(){
+       inline void insert(ed::Medicion m){
+                   _vector.push_back(m);
+                   shiftUp(size()-1);
+                   #ifndef NDEBUG
+                    assert(!isEmpty());
+                    assert(has(m));
+                   #endif
+                   }
+       
+       void remove();
+       inline void removeAll(){
 
                 _vector.clear();//Usa la función clear del vector de la stl para vaciar el montículo
                 #ifndef NDEBUG
                    assert(isEmpty());
                 #endif
        }
-
+       void modify(ed::Medicion m);
 		//! \name Operadores
    
-		// COMPLETAR
- 
+	inline MonticuloMediciones operator=(MonticuloMediciones m){
+                             removeAll();
+                             int i;
+                             for(i=0;i<m.size();i++) insert(m.getElement(i));
+                             return *this;
+                            }
 
 		////////////////////////////////////////////////////////////////////
 
 		//! \name Función de escritura
 
-		// COMPLETAR
-
+        void print() {
+           int i;
+           for(i=0;i<size();i++) std::cout<<_vector[i]<<std::endl;
+            }
 	}; // Clase MonticuloMediciones
 
 } // Espacio de nombres ed
