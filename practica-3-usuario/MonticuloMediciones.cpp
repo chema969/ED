@@ -142,7 +142,12 @@ void ed::MonticuloMediciones::remove(){
 void ed::MonticuloMediciones::modify(ed::Medicion m){
       setElement(0,m);
       int i;
-      for(i=0;i<size();i++) shiftUp(i);
+      for(i=size()-1;i>0;i--){
+	      ed::Medicion aux(_vector[0]);
+	      _vector[0]=_vector[i];
+	      _vector[i]=aux;
+	      shiftDown(0);
+      }
 }
 
 
