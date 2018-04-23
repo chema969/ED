@@ -36,6 +36,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 		//! \name Métodos privados de la clase MonticuloMediciones
 
         inline ed::Medicion getElement(int i) const{
+        std::cout<<"i="<<i<<",size="<<size()<<std::endl;
                    #ifndef NDEBUG
                      assert(i>=0);
                      assert(i< size());
@@ -79,6 +80,13 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
           void shiftDown(int i);
 
           bool has(ed::Medicion m);
+
+          void swap(int a, int b){
+                std::cout<<"voy a hacer un swap entre "<< a << " y "<< b <<std::endl;
+                ed::Medicion aux(getElement(a));
+                setElement(a,getElement(b));
+                setElement(b,aux);
+                }
 	  /////////////////////////////////////////////////////////////////////////////////////
 
 	//! \name Métodos públicos de la clase MonticuloMediciones
@@ -87,6 +95,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 		//! \name Constructor
 
          MonticuloMediciones(){
+           _vector.reserve(367);
              #ifndef NDEBUG
                      assert(isEmpty());
                    #endif
@@ -100,7 +109,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 
 
 
-        bool size() const{return _vector.size();}
+        int size() const{return _vector.size();}
        
 
 
@@ -114,15 +123,17 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 
 		//! \name Operaciones de modificación
 
-       inline void insert(ed::Medicion m){
+       inline void insert(const ed::Medicion &m){
                    _vector.push_back(m);
+                   std::cout<<size()<<std::endl;
                    shiftUp(size()-1);
+                   print();
                    #ifndef NDEBUG
                     assert(!isEmpty());
                     assert(has(m));
                    #endif
                    }
-       
+        
        void remove();
        inline void removeAll(){
 
@@ -132,15 +143,30 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
                 #endif
        }
        void modify(ed::Medicion m);
-		//! \name Operadores
+
+
+     //! \name Operadores
    
-	inline MonticuloMediciones operator=(MonticuloMediciones m){
+	inline MonticuloMediciones operator=(const MonticuloMediciones &m){
+                          ed::MonticuloMediciones n(*this);
+                          #ifndef NDEBUG
+                                assert(m!=n);
+                         #endif
                              removeAll();
                              int i;
-                             for(i=0;i<m.size();i++) insert(m.getElement(i));
+                             for(i=0;i<m.size();i++) _vector[i]=m._vector[i];
                              return *this;
                             }
 
+
+
+          inline bool operator!=(const MonticuloMediciones &m) const{
+                       int i;
+                       if(m.size()!=size())return true;
+                       for(i=0;i<m.size();i++)
+                            if(!(m._vector[i]==_vector[i])) return true;
+                       return false;
+                        }
 		////////////////////////////////////////////////////////////////////
 
 		//! \name Función de escritura

@@ -1,12 +1,12 @@
 /*!
 	\file MonticuloMediciones.cpp
 	\brief Fichero que contiene el código de las funciones de la clase MonticuloMediciones.
-	\author 
-	\date 
+	\author Jose Manuel Cuevas Muñoz
+	\date 18-04-2018
 */
 
 //#include <vector>
-#include <algorithm>
+
 #include <cassert>
 
 #include "Medicion.hpp"
@@ -23,21 +23,19 @@ void ed::MonticuloMediciones::shiftUp(int i){
               assert(i>=0);
               assert(i< size());
           #endif
-   if(getElement(i)==top()) return;//si es la cabeza, retorna
+   if(i==0){std::cout<<"Soy la cabeza"<<std::endl; return;}//si es la cabeza, retorna
    int padre=getParent(i);
    if(getElement(padre).getPrecipitacion()<getElement(i).getPrecipitacion()){ //si se cumple la condición, se procede a realizar un swap
-             ed::Medicion aux(_vector[i]);
-             _vector[i]=_vector[padre];
-             _vector[padre]=aux;
+             swap(i,padre);
              shiftUp(padre);//Va a realizar esta funcion hasta que sea mayor que el nuevo padre
              return;
              }
     else{ 
         
         #ifndef NDEBUG
-           assert(getElement(padre).getPrecipitacion()>getElement(i).getPrecipitacion());    
-           if(getRightChild(i)>(size()-1)) assert(getElement(i).getPrecipitacion()>=getElement(getRightChild(i)).getPrecipitacion());
-           assert(getElement(i).getPrecipitacion()>=getElement(getLeftChild(i)).getPrecipitacion());
+           assert(getElement(padre).getPrecipitacion()>=getElement(i).getPrecipitacion());    
+           //if(getRightChild(i)>(size()-1)) assert(getElement(i).getPrecipitacion()>=getElement(getRightChild(i)).getPrecipitacion());
+          // if(getLeftChild(i)>(size()-1))assert(getElement(i).getPrecipitacion()>=getElement(getLeftChild(i)).getPrecipitacion());
         #endif
         return;
    }
@@ -131,8 +129,8 @@ void ed::MonticuloMediciones::remove(){
      #endif
      int s=size();
      setElement(0,getElement(size()-1));
-     _vector.pop_back();
-     shiftDown(0);
+     _vector.resize(size()-1);
+    // shiftDown(0);
     #ifndef NDEBUG
        assert(size()==s-1);
      #endif

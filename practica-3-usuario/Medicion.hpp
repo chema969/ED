@@ -82,7 +82,7 @@ class Medicion
                                  return false;
                          }
 
-           inline ed::Medicion operator=(ed::Medicion &medicion){
+           inline ed::Medicion operator=(ed::Medicion medicion){
                         this->setFecha(medicion.getFecha());
                         this->setPrecipitacion(medicion.getPrecipitacion());
                         return *this;                    

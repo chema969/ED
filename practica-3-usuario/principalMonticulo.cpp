@@ -29,13 +29,7 @@
 */
 int main(int argc, char *argv[])
 {
-        ed::Fecha fe(3,3,3);
-        ed::Medicion m1;
-        ed::Medicion m2(fe,2);
-        std::cout<<"m1="<<m1.getFecha()<<" "<<m1.getPrecipitacion()<<std::endl ;
-        std::cout<<"m2="<<m2.getFecha()<<" "<<m2.getPrecipitacion()<<std::endl ;
-        m1=m2;
-        std::cout<<"m1="<<m1.getFecha()<<" "<<m1.getPrecipitacion()<<std::endl ;
+
 	if (argc != 3)
 	{
 		std::cout << "Modo de ejecución" << std::endl;
