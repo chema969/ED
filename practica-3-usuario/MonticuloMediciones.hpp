@@ -36,7 +36,6 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 		//! \name Métodos privados de la clase MonticuloMediciones
 
         inline ed::Medicion getElement(int i) const{
-        std::cout<<"i="<<i<<",size="<<size()<<std::endl;
                    #ifndef NDEBUG
                      assert(i>=0);
                      assert(i< size());
@@ -82,7 +81,6 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
           bool has(ed::Medicion m);
 
           void swap(int a, int b){
-                std::cout<<"voy a hacer un swap entre "<< a << " y "<< b <<std::endl;
                 ed::Medicion aux(getElement(a));
                 setElement(a,getElement(b));
                 setElement(b,aux);
@@ -125,9 +123,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 
        inline void insert(const ed::Medicion &m){
                    _vector.push_back(m);
-                   std::cout<<size()<<std::endl;
                    shiftUp(size()-1);
-                   print();
                    #ifndef NDEBUG
                     assert(!isEmpty());
                     assert(has(m));
@@ -143,7 +139,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
                 #endif
        }
        void modify(ed::Medicion m);
-
+       void heapsort();
 
      //! \name Operadores
    

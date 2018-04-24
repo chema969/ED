@@ -39,7 +39,9 @@ void ed::cargarMonticuloDeFichero(std::string const & nombreFichero, ed::Monticu
 
                    }
                    monticulo.print();
-                   
+                   monticulo.heapsort();
+                   std::cout<<"Ahora ordenado"<<std::endl<<std::endl<<std::endl;
+                   monticulo.print();
                }
       return;
 }
