@@ -15,11 +15,22 @@
 namespace ed
 {
 
+        int menu();
+
+
+        void comprobarMonticuloVacio(ed::MonticuloMediciones &m);
+
+
 	void cargarMonticuloDeFichero(std::string const & nombreFichero, ed::MonticuloMediciones & monticulo); 
 
 
 	void grabarMonticuloEnFichero (std::string const & nombreFichero, ed::MonticuloMediciones const & monticulo); 
 
+
+        void modificarCabeza(ed::MonticuloMediciones &m);
+
+
+        void buscarElemento(ed::MonticuloMediciones &m);
 
 } // Fin del espacio de nombre de la asignatura: ed
 

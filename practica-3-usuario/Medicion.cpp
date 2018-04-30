@@ -31,13 +31,20 @@ ostream &operator<<(ostream &stream, ed::Medicion const &medicion)
 // Sobrecarga del operador de entrada
 istream &operator>>(istream &stream, Medicion &medicion)
 {
-  Fecha f;
-  float p;
-  stream>>f;
-  std::cout<<"introduce precipitaciones: ";
-  stream>>p;
-  medicion.setFecha(f);
-  medicion.setPrecipitacion(p);
+std::string cadena;
+ed::Fecha fecha;
+  std::getline(stream,cadena,'-');
+  fecha.setDia(atoi(cadena.c_str()));
+
+  std::getline(stream,cadena,'-');
+  fecha.setMes(atoi(cadena.c_str()));
+
+  std::getline(stream,cadena,' ');
+  fecha.setAgno(atoi(cadena.c_str()));
+  medicion.setFecha(fecha);
+
+ std::getline(stream,cadena,'\n');
+  medicion.setPrecipitacion(atof(cadena.c_str()));
   return stream;
 } 
 

@@ -12,6 +12,8 @@
 
 #include <cassert>
 
+#include "macros.hpp"
+
 #include "Medicion.hpp"
 
 #include "MonticuloMedicionesInterfaz.hpp"
@@ -169,7 +171,16 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 
         void print() {
            int i;
-           for(i=0;i<size();i++) std::cout<<_vector[i]<<std::endl;
+           for(i=0;i<size();i++){ std::cout<<_vector[i]<<std::endl;
+                                      if((i+1)%22==0){
+		                           std::cout << "Pulse ";
+					   std::cout << BIGREEN;
+					   std::cout << "ENTER";
+					   std::cout << RESET;
+              				   std::cin.ignore();}
+                }
+
+		
             }
 	}; // Clase MonticuloMediciones
 
