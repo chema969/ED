@@ -19,12 +19,12 @@
 #include "MonticuloMedicionesInterfaz.hpp"
 
 
-// COMPLETAR EL CÓDIGO E INCLUIR LOS COMENTARIOS DE DOXYGEN
+// Se incluye la clase MonticuloMediciones dentro del espacio de nombres de la asigantura: ed
 
 namespace ed
 {
 
-// COMPLETAR EL CÓDIGO E INCLUIR LOS COMENTARIOS DE DOXYGEN
+//!  Definición de la clase MonticuloMediciones, heredera de MonticuloMedicionesInterfaz
 
 class MonticuloMediciones : public MonticuloMedicionesInterfaz
 {
@@ -245,7 +245,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
   	\post    has(m) == verdadero
 */
        void modify(ed::Medicion m);
-       void heapsort();
+
 
      //! \name Operadores
 

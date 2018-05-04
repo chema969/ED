@@ -10,11 +10,11 @@
 
 #include "Medicion.hpp"
 
-
+// Se incluye la clase MonticuloMedicionesInterfaz dentro del espacio de nombres de la asigantura: ed
 namespace ed
 {
 
-	
+//!  Definición de la clase virtual pura MonticuloMedicionesInterfaz	
 	class MonticuloMedicionesInterfaz
 	{
            //! \name Métodos públicos de la clase MonticuloMediciones

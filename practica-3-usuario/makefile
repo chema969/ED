@@ -1,4 +1,4 @@
-NAME=principalMonticulo2
+NAME=principalMonticulo
 
 #
 OBJECTS = $(NAME).o funcionesAuxiliares.o MonticuloMediciones.o Medicion.o Fecha.o
@@ -24,26 +24,26 @@ ndebug: objetivo
 # Primer objetivo 
 $(NAME).exe: $(OBJECTS)
 			@echo "Generando " $@
-			@g++-4.9 $^ -o $@
+			@g++ $^ -o $@
 #
 $(NAME).o: $(NAME).cpp $(INCLUDES)
 			@echo "Compilando " $<
-			@g++-4.9 $(CPPFLAGS) $<
+			@g++ $(CPPFLAGS) $<
 
 #
 funcionesAuxiliares.o: funcionesAuxiliares.cpp $(INCLUDES)
 			@echo "Compilando " $<
-			@g++-4.9 $(CPPFLAGS) $<
+			@g++ $(CPPFLAGS) $<
 
 #
 Fecha.o: Fecha.cpp Fecha.hpp 
 			@echo "Compilando " $<
-			@g++-4.9 $(CPPFLAGS) $<
+			@g++ $(CPPFLAGS) $<
 
 #
 Medicion.o: Medicion.cpp Medicion.hpp  Fecha.hpp 
 			@echo "Compilando " $<
-			@g++-4.9 $(CPPFLAGS) $<
+			@g++ $(CPPFLAGS) $<
 
 
 #
@@ -51,7 +51,7 @@ MonticuloMediciones.o: MonticuloMediciones.cpp MonticuloMediciones.hpp \
 						MonticuloMedicionesInterfaz.hpp Medicion.hpp \
 						Medicion.hpp Fecha.hpp
 			@echo "Compilando " $<
-			@g++-4.9 $(CPPFLAGS) $<
+			@g++ $(CPPFLAGS) $<
 
 
 

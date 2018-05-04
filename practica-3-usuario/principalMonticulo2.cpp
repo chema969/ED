@@ -7,12 +7,6 @@
 	\version 1.0
 */
 
-/*!
- \mainpage Implementación de un heap o montículo de mediciones de una estación meteorológica.
- \author Jose Manuel Cuevas Muñoz
- \date 28/04/2018   
- \version  1.0
-*/
 
 // Para los flujos de entrada y salida y para usar locale
 #include <iostream>
@@ -30,7 +24,7 @@
 
 
 /*! 
-	\brief   Programa principal de la práctica 1: provincia y municipios
+	\brief   Programa principal de la práctica 3: Monticulo y mediciones
 	\return  int
 */
 int main(){
@@ -129,8 +123,8 @@ int main(){
                                           std::cout<<BICYAN<<"Se ha borrado correctamente la cabeza"<<RESET<<std::endl;}
                                         else  std::cout <<BIRED<< "El monticulo no tiene mediciones" << RESET<<std::endl;
 					break;}
-                        
-
+                      
+		
 			//////////////////////////////////////////////////////////////////////////////
 			default:
 				std::cout << BIRED;

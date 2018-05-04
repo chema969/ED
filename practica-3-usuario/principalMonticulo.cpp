@@ -8,7 +8,7 @@
 
 /*!
 
-	\file principalMediciones.cpp
+	\file principalMonticulo.cpp
 	\brief Programa principal de la practica 3 de Estructuras de Datos
 */
 
