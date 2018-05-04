@@ -21,13 +21,47 @@ namespace ed
 		public:
 
 			//! \name Observadores
-                        virtual bool isEmpty() const=0;
 
-                        virtual ed::Medicion top()const=0;
+/*!	
+	\brief   Método público que permite saber si el monticulo esta vacio o no
+	\warning Función virtual pura: se debe redefinir en la clase heredera
+        \note   Función de tipo "const": no puede modificar al objeto actual
+	\pre     Ninguna
+  	\post    Ninguna
+        \return true si esta vacio, false si no
+*/
+          virtual bool isEmpty() const=0;
+
+/*!	
+	\brief   Método público que permite obtener la cabeza del monticulo
+	\warning Función virtual pura: se debe redefinir en la clase heredera
+        \note   Función de tipo "const": no puede modificar al objeto actual
+	\pre     isEmpty() == falso
+  	\post    valorDevuelto == getElement(0)
+        \return La cabeza del monticulo
+*/
+          virtual ed::Medicion top()const=0;
+
+
            //! \name Operaciones de modificación
-                        virtual void insert(const ed::Medicion &m)=0;
- 
-                        virtual void remove()=0;
+
+/*!	
+	\brief   Modificador que inserta una medición
+	\warning Función virtual pura: se debe redefinir en la clase heredera
+        \param   m: referencia constante a una medición la cual se insertara
+	\pre     Ninguna
+  	\post    isEmtpy() == falso
+  	\post    has(medición) == verdadero
+*/
+          virtual void insert(const ed::Medicion &m)=0;
+
+/*!	
+	\brief   Modificador que borra la cabeza de la lista
+	\warning Función virtual pura: se debe redefinir en la clase heredera
+	\pre     isEmpty() == falso
+  	\post    size()==old.size()-1
+*/ 
+          virtual void remove()=0;
                   
 	}; // Clase MonticuloMedicionesInterfaz
 

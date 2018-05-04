@@ -68,6 +68,7 @@ int main(){
                      std::cout<<BIBLUE<<"Introduce nombre del fichero: "<<RESET;
                      std::string nombre;
                      std::cin>>nombre;
+                     std::cin.ignore();
                      ed::cargarMonticuloDeFichero(nombre,m);
  				break;}
 
@@ -76,6 +77,7 @@ int main(){
                      std::cout<<BIBLUE<<"Introduce nombre del fichero donde grabar: "<<RESET;
                      std::string nombre;
                      std::cin>>nombre;
+                     std::cin.ignore();
                      ed::grabarMonticuloEnFichero(nombre,m);
 					break;}
 
@@ -87,10 +89,12 @@ int main(){
 			 else 	  std::cout <<BIRED<< "El monticulo no tiene mediciones" << RESET<<std::endl;
                 	break;}
 
-			case 5: 
+			case 5: {
 				  	std::cout << "[5] Mostrar el dia mas lluvioso " << std::endl; 
-                                        std::cout<<BICYAN<<m.top()<<std::endl;
-					break;
+                              if(!m.isEmpty())
+                                        std::cout<<BICYAN<<m.top()<<RESET<<std::endl;
+                         else 	  std::cout <<BIRED<< "El monticulo no tiene mediciones" << RESET<<std::endl;
+					break;}
 
 
 			//////////////////////////////////////////////////////////////////////////////
@@ -104,7 +108,7 @@ int main(){
 			case 7: {
 					std::cout << "[7] Borrar todas las mediciones del monticulo" << std::endl;
                                         m.removeAll();
-                                        std::cout<<BIRED<<"Todos los elementos han sido borrados "<<std::endl;
+                                        std::cout<<BIRED<<"Todos los elementos han sido borrados "<<RESET<<std::endl;
 					break;
                                       }
 			//////////////////////////////////////////////////////////////////////////////
@@ -115,12 +119,16 @@ int main(){
 
 			case 9: 
 					std::cout << "[9] Insertar una medicion" << std::endl;
+                                        ed::insertarElemento(m); 
 					break;
 
-			case 10: 
+			case 10:{ 
 					std::cout << "[10] Borrar la cabeza" << std::endl;
-                                        
-					break;
+                                        if(!m.isEmpty()){
+                                          m.remove();
+                                          std::cout<<BICYAN<<"Se ha borrado correctamente la cabeza"<<RESET<<std::endl;}
+                                        else  std::cout <<BIRED<< "El monticulo no tiene mediciones" << RESET<<std::endl;
+					break;}
                         
 
 			//////////////////////////////////////////////////////////////////////////////

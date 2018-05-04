@@ -30,7 +30,10 @@ namespace ed
         void modificarCabeza(ed::MonticuloMediciones &m);
 
 
-        void buscarElemento(ed::MonticuloMediciones &m);
+        void buscarElemento(ed::MonticuloMediciones const &m);
+
+
+        void insertarElemento(ed::MonticuloMediciones &m);
 
 } // Fin del espacio de nombre de la asignatura: ed
 
