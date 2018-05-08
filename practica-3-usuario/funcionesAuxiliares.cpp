@@ -80,7 +80,8 @@ int ed::menu()
 	std::cout << "[9] Insertar una medicion";
 
 	PLACE(posicion++,10);
-	std::cout << "[10] Borrar un municipio";
+	std::cout << "[10] Borrar la cabeza";
+
 
         //////////////////////////////////////////////////////////////////////////////
 	posicion++;
@@ -131,7 +132,8 @@ void ed::cargarMonticuloDeFichero(std::string const & nombreFichero, ed::Monticu
                    ed::Medicion m(f,atof(prec.c_str()));
                    monticulo.insert(m);
                      }
-                 
+               std::cout<<BIGREEN<<"Se cargo correctamente en el fichero "<<nombreFichero<<RESET<<std::endl;   
+               fichero.close();
                }
       return;
 }
@@ -140,6 +142,7 @@ void ed::cargarMonticuloDeFichero(std::string const & nombreFichero, ed::Monticu
 void ed::grabarMonticuloEnFichero(std::string const & nombreFichero, 
 							      ed::MonticuloMediciones const & monticulo)
 {
+if(monticulo.isEmpty()){ std::cout <<BIRED<< "El monticulo no tiene mediciones" << RESET<<std::endl; return;}//no hace nada si no hay mediciones en el monticulo
 std::ofstream fichero(nombreFichero.c_str());
        if(!fichero.good())
              std::cout<<BIRED<<"No se pudo cargar el fichero de salida"<<RESET<<std::endl;
@@ -149,6 +152,8 @@ std::ofstream fichero(nombreFichero.c_str());
                     fichero<<m.top()<<std::endl;
                     m.remove();
                     }
+              std::cout<<BIGREEN<<"Se grabo correctamente en el fichero "<<nombreFichero<<RESET<<std::endl;
+             fichero.close();
              }
       return;
 }
@@ -160,29 +165,39 @@ void ed::modificarCabeza(ed::MonticuloMediciones &m){
      ed::Medicion aux;
      std::cin>>aux;
      m.modify(aux);
+     std::cout<<BIGREEN<<"La cabeza fue correctamente modificada"<<RESET<<std::endl;
+     std::cin.ignore();
        }
     else
       std::cout<<BIRED<<"El monticulo esta vacio por lo que no se puede modificar la cabeza"<<RESET<<std::endl;
      }
 
  
-void ed::buscarElemento(ed::MonticuloMediciones &m){
+void ed::buscarElemento(ed::MonticuloMediciones const &m){
       std::cout<<BIBLUE<<"Introduce una fecha a buscar\n"<<BIYELLOW<<"Formato: dd-mm-aaaa y un espacio al final"<<RESET<<std::endl;
       ed::Fecha fecha;
       std::cin>>fecha;
-      std::cin.ignore();
       ed::Medicion aux(fecha);
       ed::MonticuloMediciones med=m;
       while(!med.isEmpty()){
           if(med.top()==aux){
               std::cout<<BIGREEN<<"Se ha encontrado la medicion"<<std::endl;
+              std::cin.ignore();
               std::cout<<BICYAN<<med.top()<<RESET<<std::endl;
               return;
               }
            med.remove();
            }
       std::cout<<BIRED<<"No se ha encontrado la medición"<<std::endl;
+      std::cin.ignore();
     }
   
 
-
+void ed::insertarElemento(ed::MonticuloMediciones &m){
+    std::cout<<BIBLUE<<"Introduce la nueva medición\n"<<BIYELLOW<<"Formato: dd-mm-aaaa precipitacion"<<RESET<<std::endl;
+    ed::Medicion aux;
+    std::cin>>aux;
+    m.insert(aux);
+    std::cout<<BIGREEN<<"El elemento se introdujo correctamente"<<RESET<<std::endl;
+    std::cin.ignore();
+    }

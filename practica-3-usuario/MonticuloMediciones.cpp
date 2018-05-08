@@ -66,7 +66,7 @@ void ed::MonticuloMediciones::shiftDown(int i){
                    return;
            }  
             else{
-               #ifndef NDEBUG
+              #ifndef NDEBUG
                if(!(getElement(i)==top())) assert(getElement(i).getPrecipitacion()<=getElement(getParent(i)).getPrecipitacion());//Se debe evaluar que el elemento sea menor que su padre y mayor que sus hijos
                assert(getElement(i).getPrecipitacion()>=getElement(getLeftChild(i)).getPrecipitacion());
           #endif
@@ -142,10 +142,5 @@ void ed::MonticuloMediciones::modify(ed::Medicion m){
       shiftDown(0);
 }
 
-void ed::MonticuloMediciones::heapsort(){
- int i;
-      for(i=1;i<size();i++){
-	      shiftDown(i);
-      }
-}
+
 
