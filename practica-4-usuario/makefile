@@ -1,4 +1,4 @@
-NAME=principalArbolAbarcador
+NAME=PrincipalArbolAbarcador
 
 #
 OBJECTS = $(NAME).o funcionesAuxiliares.o Grafo.o Vertice.o Lado.o
