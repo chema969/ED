@@ -16,6 +16,8 @@
 
 #include <stdio.h>
 
+#define COTA_ERROR   1.0e-6 //!< Cota de error para los numeros reales
+
 #define PLACE(x,y)   printf("\033[%d;%dH",x,y) //!< Place
 
 #define CLEAR_SCREEN        "\33[2J" //!< Clear the screen

@@ -24,32 +24,32 @@ ndebug: objetivo
 # Primer objetivo 
 $(NAME).exe: $(OBJECTS)
 			@echo "Generando " $@
-			@g++ $^ -o $@
+			@g++-4.9 $^ -o $@
 #
 $(NAME).o: $(NAME).cpp $(INCLUDES)
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 #
 funcionesAuxiliares.o: funcionesAuxiliares.cpp $(INCLUDES)
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 #
-Fecha.o: Grafo.cpp Grafo.hpp 
+Grafo.o: Grafo.cpp Grafo.hpp 
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 #
-Medicion.o: Vertice.cpp Vertice.hpp  Vertice.hpp 
+Vertice.o: Vertice.cpp Vertice.hpp  Vertice.hpp 
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 
 #
-MonticuloMediciones.o: Lado.cpp Lado.hpp 
+Lado.o: Lado.cpp Lado.hpp 
 			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
+			@g++-4.9 $(CPPFLAGS) $<
 
 
 
