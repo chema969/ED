@@ -1,0 +1,15 @@
+#ifndef FUNCIONESAUXILIARES_HPP
+#define FUNCIONESAUXILIARES_HPP
+
+
+
+
+
+
+
+
+
+
+
+
+#endif
