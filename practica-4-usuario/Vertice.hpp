@@ -95,7 +95,21 @@ class Vertice{
                                  assert(label_==label);
                            #endif
                             }
-
+ 
+//! \name Operador de la clase Vertice     
+     
+       /*! 
+		\brief  Operador que comprueba si dos vertices tienen la misma X y la misma Y
+		\note   Función inline
+		\param  vertice: Vertice pasado por referencia con el cual se comparará
+                \return True si son iguales, false si no
+		\pre    Ninguno
+		\post   Ninguno
+	*/
+            bool operator==(const ed::Vertice &vertice){
+                            if((abs(vertice.getX()-this->getX())<COTA_ERROR)&&(abs(vertice.getY()-this->getY())<COTA_ERROR)) return true;
+                            return false;
+                             }
 
 };
 
