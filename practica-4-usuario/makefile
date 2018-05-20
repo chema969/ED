@@ -41,7 +41,7 @@ Grafo.o: Grafo.cpp Grafo.hpp
 			@g++-4.9 $(CPPFLAGS) $<
 
 #
-Vertice.o: Vertice.cpp Vertice.hpp  Vertice.hpp 
+Vertice.o: Vertice.cpp Vertice.hpp  
 			@echo "Compilando " $<
 			@g++-4.9 $(CPPFLAGS) $<
 

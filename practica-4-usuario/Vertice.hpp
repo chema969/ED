@@ -17,7 +17,7 @@ class Vertice{
     private:
        double x_;//!<Cordenada x de la clase  
        double y_;//!<Cordenada y de la clase  
-       unsigned int label_;//!<Etiqueta del vertice, siempre positiva
+       int label_;//!<Etiqueta del vertice, siempre positiva
 
     public:
 
@@ -46,11 +46,11 @@ class Vertice{
 		\brief     Función que devuelve la etiqueta del vertice
 		\attention Se utiliza el modificador const en la definición de la función
 		\note      Función inline 
-		\return    Valor del atributo que representa la etiqueta del vertice dentro del grafo(tipo unsigned int)
+		\return    Valor del atributo que representa la etiqueta del vertice dentro del grafo(tipo int)
 		\pre       Ninguna
 		\post      Ninguna
 	*/
-           unsigned int getLabel()const{return label_;}
+            int getLabel()const{return label_;}
 
 
 //! \name Modificadores: funciones de modificación de la clase Vertice
@@ -89,7 +89,7 @@ class Vertice{
 		\pre   En el grafo se debe revisar que la etiqueta no se repita
 		\post  El valor de la cordenada y sera el que se ha pasado como argumento
 	*/
-            void setLabel(unsigned int label){
+            void setLabel( int label){
                             label_=label;  
                            #ifndef NDEBUG
                                  assert(label_==label);
