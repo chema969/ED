@@ -56,6 +56,8 @@ void ed::Grafo::insertVetice(double x,double y){
 
 void ed::Grafo::insertLado(int u,int v,int peso){
       #ifndef NDEBUG
+          assert(((unsigned int)u<vertices_.size())&&(u>=0));
+          assert(((unsigned int)v<vertices_.size())&&(v>=0));
           assert(!adjacent(u,v));
           assert(peso>0);
       #endif 
@@ -106,6 +108,7 @@ void ed::Grafo::removeVertice(){
  
 
 bool ed::Grafo::findVertice(double x,double y){
+      if(isEmpty())return false;
       ed::Vertice vertice;
       vertice.setX(x);
       vertice.setY(y); 
@@ -122,6 +125,7 @@ bool ed::Grafo::findVertice(double x,double y){
 
 
 bool ed::Grafo::findLado(int u,int v){
+      if(lados_.empty())return false;
       if(!adjacent(u,v)){ 
                      lado_cursor_=-1;
                      return false;

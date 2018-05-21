@@ -23,11 +23,26 @@ class Grafo{
         int vertice_cursor_;//!< Cursor del vertice
         int lado_cursor_;//!< Cursor del lado
 
+
+    //! \name Funciones privadas de la clase
+
+        /*! 
+		\brief     Función que borra la matriz de adyacencia
+		\note      Función inline
+		\pre       Ninguna
+		\post      adyacencia_.empty()==verdadero
+	*/       
         void dropAdyacencia(){
                              for(unsigned int i=0;i<adyacencia_.size();i++) 
                                                             adyacencia_[i].clear();
                              adyacencia_.clear();
                               }
+
+        /*! 
+		\brief     Función que crea de nuevo la matriz de adyacencia
+		\pre       adyacencia_.empty()==verdadero
+		\post      adyacencia_.empty()==falso
+	*/  
         void createAdyacencia();
    public:
     //! \name Constructor de la clase
@@ -60,6 +75,8 @@ class Grafo{
 		\brief     Función que comprueba si dos vertices son adyacentes o no
 		\attention Se utiliza el modificador const en la definición de la función 
 		\return    True si existe un lado que una los vertices u y v, false si no
+                \param     u: Vertice del lado
+                \param     v: El otro vertice del lado
 		\pre       Deben existir en el grafo tanto u como v
 		\post      Ninguna
 	*/
@@ -124,21 +141,60 @@ class Grafo{
        
         /*! 
 		\brief     Función que inserta un vertice al grafo
-		\pre       Ninguna
-		\post      vectores_.size()==old(vectores_.size())+1
+                \param     x: Valor del x del vertice
+                \param     y: Valor del y del vertice
+		\pre       existe(Vertice(x,y))==falso
+		\post      vertices_.size()==old(vertices_.size())+1
 	*/  
        void insertVetice(double x,double y);
 
-       
+        /*! 
+		\brief     Función que inserta un vertice al grafo
+                \param     u: Valor del primer vertice del lado
+                \param     v: Valor del segundo vertice del lado
+                \param     peso: Valor del peso del lado
+		\pre       adjacent(u,v)==falso
+		\pre       existe(vetices_[u])==verdadero
+		\pre       existe(vertices_[v]))==verdadero
+		\post      lados_.size()==old(lados_.size())+1
+	*/       
        void insertLado(int u, int v, int peso);
 
+        /*! 
+		\brief     Función que borra un vertice del grafo
+		\pre       Ninguna
+                \post      findVertice(old.currentVertice)==false
+		\post      vertices_.size()==old(vertices_.size())-1
+	*/
        void removeVertice();
+
+        /*! 
+		\brief     Función que borra un lado del grafo
+		\pre       Ninguna
+                \post      findLado(old.currentLado)==false
+		\post      lados_.size()==old(lados_.size())-1
+	*/
        void removeLado();
 
    //! \name Modificadores de los cursores: funciones de modificación de los cursores de la clase Grafo
+
+        /*! 
+		\brief     Función que busca un vertice dentro del vector de vertice y pone el cursor sobre este vector
+                \param     x: Valor del x del vertice
+                \param     y: Valor del y del vertice
+                \return    True si existe el vertice, false si no
+		\pre       Ninguno
+		\post      Si existe un vertice n que ocupa la posición i en el vector de vertices y tal que n.getX=x y n.getY=y, entonces cursor_vertices=i
+	*/ 
        bool findVertice(double x,double y);
 
-       
+        /*! 
+		\brief     Función que asigna el cursor a un vertice nuevo
+		\note      Función inline
+                \param     i: Vertice al que se dirigirá el cursor
+		\pre       i esta dentro de los vertices existentes
+		\post      vertice_cursor=i
+	*/       
        void gotoVertice(int i){
                             #ifndef NDEBUG
                                assert(i>=0);
@@ -147,12 +203,26 @@ class Grafo{
                             vertice_cursor_=i;
                               } 
 
-      
+        /*! 
+		\brief     Función que asigna el cursor al primer vertice
+		\note      Función inline
+		\pre       isEmpty==false
+		\post      vertice_cursor=primer vertice
+	*/      
        void gotoFirstVertice(){
+                             #ifndef NDEBUG
+                                assert(!isEmpty());
+                             #endif
                              vertice_cursor_=0;
                                }            
        
-
+	/*! 
+		\brief     Función que asigna el cursor al siguiente vertice
+		\note      Función inline
+		\pre       hasCurrentVertice==true
+                \pre       lastVertice==false
+		\post      vertice_cursor=old(vertice_cursor)+1
+	*/  
        void gotoNextVertice(){
                             #ifndef NDEBUG
                                assert(hasCurrentVertice());
@@ -161,10 +231,23 @@ class Grafo{
                                           vertice_cursor_++;
                               }
 
-
+       /*! 
+		\brief     Función que busca un lado dentro del vector de lados y pone el cursor sobre este lado
+                \param     u: Vertice del lado
+                \param     v: El otro vertice del lado
+                \return    True si existe lado, false si no
+		\pre       Ninguna
+		\post      Si existe un lado n que ocupa la posición i en el vector de vertices y que enlace u y v, entonces cursor_vertices=i
+	*/ 
       bool findLado(int u,int v);
 
-
+        /*! 
+		\brief     Función que asigna el cursor a un lado nuevo
+		\note      Función inline
+                \param     i: Lado al que se dirigirá el cursor
+		\pre       i esta dentro de los lados existentes
+		\post      lados_cursor=i
+	*/      
       void gotoLado(int i){
                             #ifndef NDEBUG
                                assert(i>=0);
@@ -173,11 +256,26 @@ class Grafo{
                             lado_cursor_=i;
                               }    
 
-
+	/*! 
+		\brief     Función que asigna el cursor al primer lado
+		\note      Función inline
+		\pre       lados_.empty==false
+		\post      lados_cursor=primer lado
+	*/     
        void gotoFirstLado(){
+                             #ifndef NDEBUG
+                                assert(!lados_.empty());
+                             #endif
                              lado_cursor_=0;
                                }       
 
+	/*! 
+		\brief     Función que asigna el cursor al siguiente lado
+		\note      Función inline
+		\pre       hasCurrentLado
+                \pre       !lastLado()
+		\post      lados_cursor=old(lados_cursor)+1
+	*/  
        void gotoNextLado(){
                             #ifndef NDEBUG
                                assert(hasCurrentLado());
