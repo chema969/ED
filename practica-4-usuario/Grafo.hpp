@@ -22,6 +22,13 @@ class Grafo{
         std::vector<ed::Vertice> vertices_;//!< Vector de vertices
         int vertice_cursor_;//!< Cursor del vertice
         int lado_cursor_;//!< Cursor del lado
+
+        void dropAdyacencia(){
+                             for(unsigned int i=0;i<adyacencia_.size();i++) 
+                                                            adyacencia_[i].clear();
+                             adyacencia_.clear();
+                              }
+        void createAdyacencia();
    public:
     //! \name Constructor de la clase
 
@@ -113,7 +120,7 @@ class Grafo{
                              return lados_[lado_cursor_];}       
 
 
-    //! \name Modificadores: funciones de modificación de la clase Grafo, sin tener en cuenta los modificadores de cursores, que irían aparte    
+    //! \name Modificadores de los vectores: funciones de modificación de la clase Grafo, sin tener en cuenta los modificadores de cursores, que irían aparte    
        
         /*! 
 		\brief     Función que inserta un vertice al grafo
@@ -125,8 +132,60 @@ class Grafo{
        
        void insertLado(int u, int v, int peso);
 
-
+       void removeVertice();
        void removeLado();
+
+   //! \name Modificadores de los cursores: funciones de modificación de los cursores de la clase Grafo
+       bool findVertice(double x,double y);
+
+       
+       void gotoVertice(int i){
+                            #ifndef NDEBUG
+                               assert(i>=0);
+                               assert((unsigned int)i<vertices_.size());
+                            #endif
+                            vertice_cursor_=i;
+                              } 
+
+      
+       void gotoFirstVertice(){
+                             vertice_cursor_=0;
+                               }            
+       
+
+       void gotoNextVertice(){
+                            #ifndef NDEBUG
+                               assert(hasCurrentVertice());
+                            #endif
+                             if((unsigned int)vertice_cursor_<vertices_.size()) 
+                                          vertice_cursor_++;
+                              }
+
+
+      bool findLado(int u,int v);
+
+
+      void gotoLado(int i){
+                            #ifndef NDEBUG
+                               assert(i>=0);
+                               assert((unsigned int)i<lados_.size());
+                            #endif
+                            lado_cursor_=i;
+                              }    
+
+
+       void gotoFirstLado(){
+                             lado_cursor_=0;
+                               }       
+
+       void gotoNextLado(){
+                            #ifndef NDEBUG
+                               assert(hasCurrentLado());
+                            #endif
+                             if((unsigned int)lado_cursor_<lados_.size()) 
+                                          lado_cursor_++;
+                              }
+
 };
 
 }
