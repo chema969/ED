@@ -44,6 +44,9 @@ class Grafo{
 		\post      adyacencia_.empty()==falso
 	*/  
         void createAdyacencia();
+        
+        bool sortLados(Lado i,Lado j){return i.getPeso()<j.getPeso();}
+       
    public:
     //! \name Constructor de la clase
 
@@ -137,6 +140,7 @@ class Grafo{
                              return lados_[lado_cursor_];}       
 
 
+
     //! \name Modificadores de los vectores: funciones de modificación de la clase Grafo, sin tener en cuenta los modificadores de cursores, que irían aparte    
        
         /*! 
@@ -223,12 +227,15 @@ class Grafo{
                 \pre       lastVertice==false
 		\post      vertice_cursor=old(vertice_cursor)+1
 	*/  
-       void gotoNextVertice(){
+       bool gotoNextVertice(){
                             #ifndef NDEBUG
                                assert(hasCurrentVertice());
                             #endif
-                             if((unsigned int)vertice_cursor_<vertices_.size()) 
+                             if((unsigned int)vertice_cursor_<vertices_.size()){
                                           vertice_cursor_++;
+                                          return true;
+                                          }
+                              return false;
                               }
 
        /*! 
@@ -276,14 +283,20 @@ class Grafo{
                 \pre       !lastLado()
 		\post      lados_cursor=old(lados_cursor)+1
 	*/  
-       void gotoNextLado(){
+       bool gotoNextLado(){
                             #ifndef NDEBUG
                                assert(hasCurrentLado());
                             #endif
-                             if((unsigned int)lado_cursor_<lados_.size()) 
+                             if((unsigned int)lado_cursor_<lados_.size()){ 
                                           lado_cursor_++;
+                                          return true;}
+                             return false;
                               }
+                          
+   //! \name Algoritmos que devuelven el arbol abarcador de coste mínimo
+       ed::Grafo kruskal();
 
+                              
 };
 
 }

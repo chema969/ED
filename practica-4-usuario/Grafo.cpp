@@ -3,11 +3,15 @@
 #include "Vertice.hpp"
 #include "Lado.hpp"
 #include <cassert>
+#include <algorithm>
 
 namespace ed{
 
 
 void ed::Grafo::createAdyacencia(){
+      #ifndef NDEBUG
+        assert(adyacencia_.empty());
+      #endif
         adyacencia_.resize(vertices_.size());
         for(unsigned int i=0;i<adyacencia_.size();i++)
                         adyacencia_[i].resize(vertices_.size(),0);
@@ -141,15 +145,24 @@ bool ed::Grafo::findLado(int u,int v){
     }   
 
 
-
-
-
-
-
-
-
-
-
+ed::Grafo ed::Grafo::kruskal(){
+      std::sort(lados_.begin(),lados_.end(),this->sortLados);
+      ed::Grafo coste_minimo;
+      std::vector<bool> prueba;
+      prueba.resize(vertices_.size(),false);
+      for(unsigned int i=0;i<vertices_.size();i++){
+          insertVetice(vertices_[i].getX(),vertices_[i].getY()); 
+      }
+      std::vector <int> vertices_actuales;
+      for(unsigned int i=0;i<lados_.size();i++){
+           if((prueba[lados_[i].first()]==false)||(prueba[lados_[i].second()]==false)){
+                coste_minimo.insertLado(lados_[i].first(),lados_[i].second(),lados_[i].getPeso());
+                prueba[lados_[i].first()]=true;
+                prueba[lados_[i].second()]=true;
+                }
+      }
+      return coste_minimo;
+}
 
 
 }
