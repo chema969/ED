@@ -74,6 +74,9 @@ class Grafo{
         bool isEmpty()const{
                          return vertices_.empty();}
 
+  
+        int size()const{
+                         return vertices_.size();}
 	/*! 
 		\brief     Función que comprueba si dos vertices son adyacentes o no
 		\attention Se utiliza el modificador const en la definición de la función 
@@ -150,7 +153,7 @@ class Grafo{
 		\pre       existe(Vertice(x,y))==falso
 		\post      vertices_.size()==old(vertices_.size())+1
 	*/  
-       void insertVetice(double x,double y);
+       void insertVertice(double x,double y);
 
         /*! 
 		\brief     Función que inserta un vertice al grafo

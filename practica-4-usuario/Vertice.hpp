@@ -6,9 +6,13 @@
 #ifndef VERTICE_HPP
 #define VERTICE_HPP
 
+#include <iostream>
 #include <cstdlib>
 #include <cassert>
 #include "macros.hpp"
+
+using std::istream;
+using std::ostream;
 
 namespace ed {
 //!  Definición de la clase Vertice
@@ -113,6 +117,8 @@ class Vertice{
 
 };
 
+            ostream &operator<<(ostream &stream,ed::Vertice const & vertice);
+            istream &operator>>(istream &stream,ed::Vertice  & vertice);
 }
 
 // \brief Fin de namespace ed.

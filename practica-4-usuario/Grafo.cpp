@@ -36,7 +36,7 @@ bool ed::Grafo::adjacent(int u, int v)const{
 
 
 
-void ed::Grafo::insertVetice(double x,double y){
+void ed::Grafo::insertVertice(double x,double y){
      ed::Vertice vertice;
      vertice.setX(x);
      vertice.setY(y);
@@ -154,7 +154,7 @@ ed::Grafo ed::Grafo::kruskal(){
       std::vector<bool> prueba;
       prueba.resize(vertices_.size(),false);
       for(unsigned int i=0;i<vertices_.size();i++)
-          coste_minimo.insertVetice(vertices_[i].getX(),vertices_[i].getY()); //Insertamos todos los vertices en el arbol abarcador de coste minimo
+          coste_minimo.insertVertice(vertices_[i].getX(),vertices_[i].getY()); //Insertamos todos los vertices en el arbol abarcador de coste minimo
       
       std::vector <int> vertices_actuales;
       for(unsigned int i=0;i<lados_.size();i++){
@@ -176,7 +176,7 @@ ed::Grafo ed::Grafo::prim(){
       std::vector<int> vistos;
       std::vector<int> por_ver;
       for(unsigned int i=0;i<vertices_.size();i++)
-          coste_minimo.insertVetice(vertices_[i].getX(),vertices_[i].getY()); //Insertamos todos los vertices en el arbol abarcador de coste minimo+
+          coste_minimo.insertVertice(vertices_[i].getX(),vertices_[i].getY()); //Insertamos todos los vertices en el arbol abarcador de coste minimo+
 
       vistos.push_back(0);
       for(unsigned int i=1;i<vertices_.size();i++)
