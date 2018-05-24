@@ -12,7 +12,7 @@ namespace ed{
 class Lado{
     //! \name Atributos privados de la clase Lado
      private:
-      int peso_;//!<Peso del vector
+      double peso_;//!<Peso del vector
       int vertice1_;//!<Etiqueta del vertice 1 del lado
       int vertice2_;//!<Etiqueta del vertice 2 del lado
      public:
@@ -26,7 +26,7 @@ class Lado{
                 \pre       Ninguna
 		\post      vertice1_=vertice1,    vertice2_=vertice2,   peso_=peso
 	*/
-      Lado(int vertice1,int vertice2,int peso=0){
+      Lado(int vertice1,int vertice2,double peso=0.0){
                           vertice1_=vertice1;
                           vertice2_=vertice2;
                           peso_=peso;
@@ -37,11 +37,11 @@ class Lado{
 		\brief     Función que devuelve el peso del lado
 		\attention Se utiliza el modificador const en la definición de la función 
 		\note      Función inline
-		\return    Valor del atributo peso, del tipo int
+		\return    Valor del atributo peso, del tipo double
 		\pre       Ninguna
 		\post      Ninguna
 	*/
-      int getPeso()const{return peso_;}
+      double getPeso()const{return peso_;}
 
 	/*! 
 		\brief     Función que verifica si el vertice pertenece al lado
@@ -97,7 +97,7 @@ class Lado{
 		\pre       peso>=0
 		\post      peso_==i
 	*/
-      void setPeso(int i){
+      void setPeso(double i){
                            #ifndef NDEBUG
                              assert(i>=0);
                            #endif

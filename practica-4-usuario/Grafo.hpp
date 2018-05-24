@@ -45,7 +45,7 @@ class Grafo{
 	*/  
         void createAdyacencia();
         
-        bool sortLados(Lado i,Lado j){return i.getPeso()<j.getPeso();}
+        static bool sortLados(Lado i,Lado j){return i.getPeso()<j.getPeso();}
        
    public:
     //! \name Constructor de la clase
@@ -162,7 +162,7 @@ class Grafo{
 		\pre       existe(vertices_[v]))==verdadero
 		\post      lados_.size()==old(lados_.size())+1
 	*/       
-       void insertLado(int u, int v, int peso);
+       void insertLado(int u, int v);
 
         /*! 
 		\brief     Función que borra un vertice del grafo
@@ -295,6 +295,7 @@ class Grafo{
                           
    //! \name Algoritmos que devuelven el arbol abarcador de coste mínimo
        ed::Grafo kruskal();
+       ed::Grafo prim();
 
                               
 };

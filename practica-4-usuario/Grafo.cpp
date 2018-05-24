@@ -4,7 +4,7 @@
 #include "Lado.hpp"
 #include <cassert>
 #include <algorithm>
-
+#include <cmath>
 namespace ed{
 
 
@@ -58,13 +58,15 @@ void ed::Grafo::insertVetice(double x,double y){
 
 
 
-void ed::Grafo::insertLado(int u,int v,int peso){
+void ed::Grafo::insertLado(int u,int v){
       #ifndef NDEBUG
           assert(((unsigned int)u<vertices_.size())&&(u>=0));
           assert(((unsigned int)v<vertices_.size())&&(v>=0));
           assert(!adjacent(u,v));
-          assert(peso>0);
       #endif 
+      double x_value=pow(vertices_[u].getX()-vertices_[v].getX(),2);
+      double y_value=pow(vertices_[u].getY()-vertices_[v].getY(),2);
+      double peso=sqrt(x_value-y_value);
       ed::Lado lado(u,v,peso);
       lados_.push_back(lado);
       adyacencia_[u][v]=1;
@@ -145,24 +147,72 @@ bool ed::Grafo::findLado(int u,int v){
     }   
 
 
+
 ed::Grafo ed::Grafo::kruskal(){
       std::sort(lados_.begin(),lados_.end(),this->sortLados);
       ed::Grafo coste_minimo;
       std::vector<bool> prueba;
       prueba.resize(vertices_.size(),false);
-      for(unsigned int i=0;i<vertices_.size();i++){
-          insertVetice(vertices_[i].getX(),vertices_[i].getY()); 
-      }
+      for(unsigned int i=0;i<vertices_.size();i++)
+          coste_minimo.insertVetice(vertices_[i].getX(),vertices_[i].getY()); //Insertamos todos los vertices en el arbol abarcador de coste minimo
+      
       std::vector <int> vertices_actuales;
       for(unsigned int i=0;i<lados_.size();i++){
            if((prueba[lados_[i].first()]==false)||(prueba[lados_[i].second()]==false)){
-                coste_minimo.insertLado(lados_[i].first(),lados_[i].second(),lados_[i].getPeso());
+                coste_minimo.insertLado(lados_[i].first(),lados_[i].second());
                 prueba[lados_[i].first()]=true;
                 prueba[lados_[i].second()]=true;
                 }
       }
       return coste_minimo;
 }
+
+
+ed::Grafo ed::Grafo::prim(){
+      #ifndef NDEBUG
+         assert(!isEmpty());
+      #endif
+      ed::Grafo coste_minimo;
+      std::vector<int> vistos;
+      std::vector<int> por_ver;
+      for(unsigned int i=0;i<vertices_.size();i++)
+          coste_minimo.insertVetice(vertices_[i].getX(),vertices_[i].getY()); //Insertamos todos los vertices en el arbol abarcador de coste minimo+
+
+      vistos.push_back(0);
+      for(unsigned int i=1;i<vertices_.size();i++)
+          por_ver.push_back(i);
+
+      while(!por_ver.empty()){
+          int from_old=-1;
+          std::vector<int>::iterator erase;
+          int from_new=-1;
+          double peso=9999999999;
+          for(std::vector<int>::iterator it=por_ver.begin();it!=por_ver.end();it++){
+              for(std::vector<int>::iterator jt=vistos.begin();jt!=vistos.end();jt++){
+                  if(adjacent(*it,*jt)){
+                     findLado(*it,*jt);
+                     if(currentLado().getPeso()<peso){
+                          peso=currentLado().getPeso();
+                          from_old=*jt;
+                          erase=it;
+                          from_new=*it;
+                          } 
+                  }
+              }            
+           }
+           if((from_old!=-1)&&(from_new!=-1)){
+              coste_minimo.insertLado(from_old,from_new);
+              por_ver.erase(erase);
+              vistos.push_back(from_new);
+              }
+           else{
+              vistos.push_back(por_ver[0]);
+              por_ver.erase(por_ver.begin());
+              }
+      }
+   return coste_minimo;
+   }
+
 
 
 }
