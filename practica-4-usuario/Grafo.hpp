@@ -141,9 +141,21 @@ class Grafo{
                                assert(hasCurrentLado());
                             #endif
                              return lados_[lado_cursor_];}       
-
-
-
+       
+        bool estanUnidos(int i,int j)const{
+                             std::vector<std::vector <int> > unidos=warshall();
+                             if(unidos[i][j]==0)return false;
+                             else return true;
+                             }
+        
+        bool todosUnidos()const{
+                             std::vector<std::vector <int> > unidos=warshall();
+                             for(int i=0;i<size();i++){
+                                  for(int j=0;j<size();j++){
+                                       if(unidos[i][j]==0)return false;
+                                   }
+                             }
+                             return true;}
     //! \name Modificadores de los vectores: funciones de modificación de la clase Grafo, sin tener en cuenta los modificadores de cursores, que irían aparte    
        
         /*! 
@@ -234,7 +246,7 @@ class Grafo{
                             #ifndef NDEBUG
                                assert(hasCurrentVertice());
                             #endif
-                             if((unsigned int)vertice_cursor_<vertices_.size()){
+                             if((unsigned int)vertice_cursor_<vertices_.size()-1){
                                           vertice_cursor_++;
                                           return true;
                                           }
@@ -299,7 +311,10 @@ class Grafo{
    //! \name Algoritmos que devuelven el arbol abarcador de coste mínimo
        ed::Grafo kruskal();
        ed::Grafo prim();
-
+   //! \name Otros algoritmos
+       std::vector< std::vector<int> > warshall()const;
+   //! \name Funcion para imprimir el grafo
+       void imprimir();
                               
 };
 

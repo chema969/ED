@@ -3,8 +3,10 @@
 #include "Vertice.hpp"
 #include "Lado.hpp"
 #include <cassert>
+#include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <iomanip> 
 namespace ed{
 
 
@@ -66,7 +68,7 @@ void ed::Grafo::insertLado(int u,int v){
       #endif 
       double x_value=pow(vertices_[u].getX()-vertices_[v].getX(),2);
       double y_value=pow(vertices_[u].getY()-vertices_[v].getY(),2);
-      double peso=sqrt(x_value-y_value);
+      double peso=sqrt(x_value+y_value);
       ed::Lado lado(u,v,peso);
       lados_.push_back(lado);
       adyacencia_[u][v]=1;
@@ -88,11 +90,15 @@ void ed::Grafo::removeLado(){
 
 void ed::Grafo::removeVertice(){
     int curs=vertice_cursor_;
-    for(std::vector<ed::Lado>::iterator it=lados_.begin();it!=lados_.end();it++){
+    std::cout<<lados_.size();
+    std::vector <ed::Lado>::iterator it;
+    for(it=lados_.begin();it!=lados_.end();++it){
+         std::cout<<"Lados actualmente: "<<it->first()<<" y "<<it->second()<<" con peso "<<it->getPeso()<<std::endl;
          if(it->has(curs))
                   lados_.erase(it);
            }
-    for(std::vector<ed::Lado>::iterator it=lados_.begin();it!=lados_.end();it++){
+    
+   /* for(std::vector<ed::Lado>::iterator it=lados_.begin();it!=lados_.end();it++){
           if(it->has(vertices_.size()-1)){
                   int first=it->first();
                   int second=it->second(); 
@@ -106,10 +112,12 @@ void ed::Grafo::removeVertice(){
               }           
     vertices_[curs]=vertices_[vertices_.size()-1];
     vertices_.resize(vertices_.size()-1);
-    vertices_[curs].setLabel(curs);    
-     
-    dropAdyacencia();
-    createAdyacencia();
+    vertices_[curs].setLabel(curs);    */
+    std::cout<<"Lados actualmente"<<std::endl;
+    for(unsigned int i=0;i<lados_.size();i++)
+       std::cout<<"Lado: une "<<lados_[i].first()<<" y "<<lados_[i].second()<<" con peso "<<lados_[i].getPeso()<<std::endl;
+  /*  dropAdyacencia();
+    createAdyacencia();*/
 }
  
 
@@ -137,7 +145,7 @@ bool ed::Grafo::findLado(int u,int v){
                      return false;
                         }
       for(unsigned int i=0;i<lados_.size();i++){
-               if((lados_[i].has(u))&&(lados_[i].other(v))){
+               if((lados_[i].has(u))&&(lados_[i].other(u)==v)){
                                          lado_cursor_=i;
                                          return true; 
                                            }  
@@ -156,16 +164,28 @@ ed::Grafo ed::Grafo::kruskal(){
       for(unsigned int i=0;i<vertices_.size();i++)
           coste_minimo.insertVertice(vertices_[i].getX(),vertices_[i].getY()); //Insertamos todos los vertices en el arbol abarcador de coste minimo
       
-      std::vector <int> vertices_actuales;
+
+      #ifndef NDEBUG
+          for(unsigned int i=0;i<prueba.size();i++) assert(prueba[i]==false);
+          assert(prueba.size()==vertices_.size());
+      #endif
+   
       for(unsigned int i=0;i<lados_.size();i++){
            if((prueba[lados_[i].first()]==false)||(prueba[lados_[i].second()]==false)){
                 coste_minimo.insertLado(lados_[i].first(),lados_[i].second());
                 prueba[lados_[i].first()]=true;
                 prueba[lados_[i].second()]=true;
                 }
+            else{
+                 if(!coste_minimo.estanUnidos(lados_[i].first(),lados_[i].second())){
+                                     coste_minimo.insertLado(lados_[i].first(),lados_[i].second());  }
+                    
+                 else if(coste_minimo.todosUnidos())return coste_minimo;
+                 }
       }
       return coste_minimo;
 }
+
 
 
 ed::Grafo ed::Grafo::prim(){
@@ -212,6 +232,42 @@ ed::Grafo ed::Grafo::prim(){
       }
    return coste_minimo;
    }
+
+
+void ed::Grafo::imprimir(){
+   for(int i=0;i<size();i++){
+      std::cout<<"Vertice "<<i<<": "<<vertices_[i].getX()<<" "<<vertices_[i].getY()<<std::endl;
+      }
+   for(int i=0;i<size();i++){
+      std::cout<<"|";
+      for(int j=0;j<size();j++){
+         if(adyacencia_[i][j]==1){
+            findLado(j,i);
+            std::cout<<currentLado().getPeso();
+           }
+         else
+            std::cout<<std::setprecision (5)<<0;
+        std::cout<<"\t";
+        }
+    std::cout<<"|"<<std::endl;
+   }
+}
+
+
+std::vector<std::vector<int> > ed::Grafo::warshall()const{
+    std::vector< std::vector<int> > path = adyacencia_;
+    for(int k = 0; k < size(); k++){
+        for(int i = 0; i < size(); i++){
+            for(int j = 0; j < size(); j++){
+                if(path[i][j]==0){
+                   path[i][j]=path[i][k]*path[k][j];
+                 }
+            }
+         }
+    }
+    return path;
+}
+
 
 
 

@@ -6,7 +6,7 @@
 	\date 28/04/2018
 	\version 1.0
 */
-
+#include <string>
 #include <iostream>
 #include "funcionesAuxiliares.hpp"
 #include "Grafo.hpp"
@@ -44,45 +44,79 @@ int main(){
 					break;
 
 			//////////////////////////////////////////////////////////////////////////////
-			case 2: 
-					std::cout << "[2] Cargar la provincia desde un fichero" << std::endl;
+			case 2: {
+					std::cout << "[2] Cargar el grafo desde un fichero" << std::endl;
+                     std::string fichero;
+                     std::cout<<BIBLUE<<"Introduce el nombre del fichero a cargar"<<RESET<<std::endl;
+                     std::cin>>fichero;
+                     std::cin.ignore();
+                     ed::leeFichero(fichero,grafo);
 				break;
-
-			case 3: 
-					std::cout << "[3] Grabar la provincia en un fichero" << std::endl;
-					break;
-
+                                  }
+			case 3: {
+					std::cout << "[3] Grabar el grafo en un fichero" << std::endl;
+                        if(grafo.isEmpty()) std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;
+		        else{
+      	                     std::string fichero;
+                             std::cout<<BIBLUE<<"Introduce el nombre del fichero a cargar"<<RESET<<std::endl;
+                             std::cin>>fichero;
+                             std::cin.ignore();
+                             ed::escribeFichero(fichero,grafo);
+                             }
+                		break;
+                        }
 			//////////////////////////////////////////////////////////////////////////////
 			case 4: 
-				  	std::cout << "[4] Consultar datos de la provincia: " << std::endl; 
+				  	std::cout << "[4] Consultar datos del grafo: " << std::endl; 
+                             if(grafo.isEmpty())
+                             std::cout<<BIRED<<"El grafo está vacio"<<RESET<<std::endl;
+                                     
+                             else           grafo.imprimir();
 					break;
 
-			case 5: 
-				  	std::cout << "[5] Mostrar municipios de la provincia: " << std::endl; 
+			
+			//////////////////////////////////////////////////////////////////////////////
+			case 5: {
+					std::cout << "[5] Mostrar el arbol abarcador de coste minimo:prim" << std::endl;
+                                         if(grafo.isEmpty()) std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;
+                                         else{
+                                         ed::Grafo aux=grafo.prim();
+                                         aux.imprimir();}
+					break;
+                                    }
+
+			case 6: {
+					std::cout << "[6] Mostrar el arbol abarcador de coste minimo:kruskal" << std::endl;
+                                       if(grafo.isEmpty()) std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;  
+                                        else{
+                                        ed::Grafo aux=grafo.kruskal();
+                                        aux.imprimir();}
+					break;
+                                 }
+                        case 7: 
+				  	std::cout << "[7] Mostrar si dos nodos estan unidos: " << std::endl; 
+                                        ed::unidos(grafo);
 					break;
 
 
 			//////////////////////////////////////////////////////////////////////////////
-			case 6: 
-					std::cout << "[6] Modificar datos de la provincia: código o nombre" << std::endl;
+			case 8: {
+					std::cout << "[8] Mostrar si todos los nodos estan unidos" << std::endl;
+                                        if(grafo.isEmpty()) std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;
+                                        else{
+                                           if(grafo.todosUnidos())std::cout<<BICYAN<<"Se pueden acceder a todos los nodos del grafo desde cualquier nodo"<<RESET<<std::endl;
+                                           else std::cout<<"Hay nodos que son inaccesible desde algunos otros nodos";
+                                            }
 					break;
-
-
-			case 7: 
-					std::cout << "[7] Borrar todos los municipios de una provincia" << std::endl;
-					break;
-
-			//////////////////////////////////////////////////////////////////////////////
-			case 8: 
-					std::cout << "[8] Consultar un municipio" << std::endl;
-					break;
-
+                                    }
 			case 9: 
-					std::cout << "[9] Insertar un municipio" << std::endl;
+					std::cout << "[9] Insertar un vertice en el grafo" << std::endl;
+                                        ed::insertarVertice(grafo);
 					break;
 
 			case 10: 
-					std::cout << "[10] Borrar un municipio" << std::endl;
+					std::cout << "[10] Borrar un vertice en el grafo" << std::endl;
+                                        ed::borrarVertice(grafo);
 					break;
                         
             case 11: 

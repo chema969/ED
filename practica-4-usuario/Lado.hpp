@@ -53,7 +53,7 @@ class Lado{
 		\post      Ninguna
 	*/
       bool has(int vertex)const{
-                   if(vertice1_==vertex || vertice2_==vertex) 
+                   if((vertice1_==vertex) || (vertice2_==vertex)) 
                                    return true;
                     return false;                         
                     }
