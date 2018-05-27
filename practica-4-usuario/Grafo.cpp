@@ -90,34 +90,31 @@ void ed::Grafo::removeLado(){
 
 void ed::Grafo::removeVertice(){
     int curs=vertice_cursor_;
-    std::cout<<lados_.size();
-    std::vector <ed::Lado>::iterator it;
-    for(it=lados_.begin();it!=lados_.end();++it){
-         std::cout<<"Lados actualmente: "<<it->first()<<" y "<<it->second()<<" con peso "<<it->getPeso()<<std::endl;
-         if(it->has(curs))
-                  lados_.erase(it);
-           }
-    
-   /* for(std::vector<ed::Lado>::iterator it=lados_.begin();it!=lados_.end();it++){
-          if(it->has(vertices_.size()-1)){
-                  int first=it->first();
-                  int second=it->second(); 
-                  int peso=it->getPeso();
+    for(unsigned int i=0;i<lados_.size();i++){
+             if(lados_[i].has(curs)){
+                   lados_.erase(lados_.begin()+i);
+                   i--;
+                     }
+      }
+    for(unsigned int i=0;i<lados_.size();i++){
+          if(lados_[i].has(vertices_.size()-1)){
+                  int first=lados_[i].first();
+                  int second=lados_[i].second(); 
+                  int peso=lados_[i].getPeso();
                   if((unsigned int)first==vertices_.size()-1) first=curs;
                   if((unsigned int)second==vertices_.size()-1) second=curs;
                   ed::Lado l(first,second,peso);
-                  lados_.erase(it);
+                  lados_.erase(lados_.begin()+i);
+                  i--;
                   lados_.push_back(l);
                   }
               }           
     vertices_[curs]=vertices_[vertices_.size()-1];
     vertices_.resize(vertices_.size()-1);
-    vertices_[curs].setLabel(curs);    */
-    std::cout<<"Lados actualmente"<<std::endl;
-    for(unsigned int i=0;i<lados_.size();i++)
-       std::cout<<"Lado: une "<<lados_[i].first()<<" y "<<lados_[i].second()<<" con peso "<<lados_[i].getPeso()<<std::endl;
-  /*  dropAdyacencia();
-    createAdyacencia();*/
+    vertices_[curs].setLabel(curs);    
+
+    dropAdyacencia();
+    createAdyacencia();
 }
  
 

@@ -26,7 +26,7 @@ class Lado{
                 \pre       Ninguna
 		\post      vertice1_=vertice1,    vertice2_=vertice2,   peso_=peso
 	*/
-      Lado(int vertice1,int vertice2,double peso=0.0){
+      Lado(int vertice1=-1,int vertice2=-1,double peso=0.0){
                           vertice1_=vertice1;
                           vertice2_=vertice2;
                           peso_=peso;
