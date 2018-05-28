@@ -116,12 +116,30 @@ class Vertice{
                              }
 
 };
-
+//! \name Operadores de lectura y escritura    
+     
+       /*! 
+		\brief  Operador que escribe los elementos del vector en un flujo de salida
+                \param  stream:  Flujo de salida 
+		\param  vertice: Vertice constante pasado por referencia el cual se escribirá
+                \return Flujo de salida en el que está escrito el vertice
+		\pre    Ninguno
+		\post   Ninguno
+	*/
             ostream &operator<<(ostream &stream,ed::Vertice const & vertice);
+
+       /*! 
+		\brief  Operador que lee los elementos del vector de un flujo de entrada
+                \param  stream:  Flujo de entrada del que se lee 
+		\param  vertice: Vertice pasado por referencia el cual obtendrá unos valores de x e y dependiendo del flujo
+                \return Flujo de entrada
+		\pre    Ninguno
+		\post   X e Y obtienen los valores pasados por el flujo
+	*/
             istream &operator>>(istream &stream,ed::Vertice  & vertice);
 }
 
-// \brief Fin de namespace ed.
+//! \brief Fin de namespace ed.
 
 
 

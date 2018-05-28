@@ -112,6 +112,6 @@ class Lado{
 
    
      };
-     }
+     }//! \brief Fin de namespace ed.
 
 #endif

@@ -1,17 +1,22 @@
 /*!
 
-	\file principalArbolAbarcador.cpp
+	\mainpage PRACTICA 4:Implementación de un grafo para conseguir el arbol abarcador de coste minimo
 	\brief Programa principal de la práctica 4 de ED: Grafo y arbol abarcador del coste minimo
 	\author Jose Manuel Cuevas Muñoz
 	\date 28/04/2018
 	\version 1.0
+*/
+
+/*! 
+        \file    PrincipalArbolAbarcador.cpp
+	\brief   Programa principal de la práctica 4: Grafo y arbol abarcador del coste mínimo
 */
 #include <string>
 #include <iostream>
 #include "funcionesAuxiliares.hpp"
 #include "Grafo.hpp"
 /*! 
-	\brief   Programa principal de la práctica 4: Grafo y arbol abarcador del coste mínimo
+	\brief   Función principal de la práctica 4
 	\return  int
 */
 int main(){
@@ -21,7 +26,7 @@ int main(){
 	int opcion;
 
 	do{
-		// Se elige la opción del menún
+		// Se elige la opción del menú
 		opcion = ed::menu();		
 
 		std::cout << CLEAR_SCREEN;
@@ -80,7 +85,7 @@ int main(){
 					std::cout << "[5] Mostrar el arbol abarcador de coste minimo:prim" << std::endl;
                                          if(grafo.isEmpty()) std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;
                                          else{
-                                         ed::Grafo aux=grafo.prim();
+                                         ed::Grafo aux=ed::primPrueba(grafo);
                                          aux.imprimir();
                                          std::cout<<"El peso total del arbol abarcador de coste minimo es "<<aux.getPesoTotal()<<std::endl;}
 					break;
@@ -90,7 +95,7 @@ int main(){
 					std::cout << "[6] Mostrar el arbol abarcador de coste minimo:kruskal" << std::endl;
                                        if(grafo.isEmpty()) std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;  
                                         else{
-                                        ed::Grafo aux=grafo.kruskal();
+                                        ed::Grafo aux=ed::kruskalPrueba(grafo);
                                         aux.imprimir();
                                         std::cout<<"El peso total del arbol abarcador de coste minimo es "<<aux.getPesoTotal()<<std::endl;}
 					break;
@@ -107,7 +112,7 @@ int main(){
                                         if(grafo.isEmpty()) std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;
                                         else{
                                            if(grafo.todosUnidos())std::cout<<BICYAN<<"Se pueden acceder a todos los nodos del grafo desde cualquier nodo"<<RESET<<std::endl;
-                                           else std::cout<<"Hay nodos que son inaccesible desde algunos otros nodos";
+                                           else std::cout<<BIRED<<"Hay nodos que son inaccesible desde algunos otros nodos"<<RESET<<std::endl;
                                             }
 					break;
                                     }

@@ -1,3 +1,7 @@
+/*! 
+   \file Lado.cpp
+   \brief Funciones de la clase Lado
+*/
 #include "Lado.hpp"
 
 namespace ed{
@@ -26,4 +30,4 @@ namespace ed{
 
 
 
-}
+}//!\brief Fin del espacio de nombres ed

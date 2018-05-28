@@ -1,3 +1,7 @@
+/*! 
+   \file Vertice.cpp
+   \brief Fichero con funciones de la clase Vertice
+*/
 #include "Vertice.hpp"
 #include <iostream>
 #include <string>
@@ -20,5 +24,5 @@ namespace ed{
 
     return stream;
     }
-}
+}//! \brief Fin de namespace ed.
 

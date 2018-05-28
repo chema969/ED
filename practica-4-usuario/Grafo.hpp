@@ -11,11 +11,13 @@
 #include <cassert>
 
 
+
 namespace ed{
 
+//!  Definición de la estructura Dijkstra
 struct Dijkstra{
-   std::vector <double> distancias;
-   std::vector <int> predecesores;
+   std::vector <double> distancias;//!< Distancias entre el origen y el nodo n
+   std::vector <int> predecesores;//!< Predecesor para el camino mínimo
    };
 
 //!  Definición de la clase Grafo
@@ -50,7 +52,8 @@ class Grafo{
 	*/  
         void createAdyacencia();
         
-        static bool sortLados(Lado i,Lado j){return i.getPeso()<j.getPeso();}
+
+
        
    public:
     //! \name Constructor de la clase
@@ -79,7 +82,14 @@ class Grafo{
         bool isEmpty()const{
                          return vertices_.empty();}
 
-  
+	/*! 
+		\brief     Función que devuelve el numero de vertices del grafo
+		\attention Se utiliza el modificador const en la definición de la función 
+		\note      Función inline
+		\return    Numero de vertices del grafo
+		\pre       Ninguna
+		\post      Ninguna
+	*/  
         int size()const{
                          return vertices_.size();}
 	/*! 
@@ -147,12 +157,28 @@ class Grafo{
                             #endif
                              return lados_[lado_cursor_];}       
        
+        /*! 
+		\brief     Función que comprueba si dos vertices estan unidos mediante un intermediario(o sin este) o no
+		\attention Se utiliza el modificador const en la definición de la función 
+		\note      Función inline
+		\return    True si, efectivamente, estan unidos. False si no
+		\pre       isEmpty()==false
+		\post      Ninguna
+	*/       
         bool estanUnidos(int i,int j)const{
                              std::vector<std::vector <int> > unidos=warshall();
                              if(unidos[i][j]==0)return false;
                              else return true;
                              }
-        
+
+        /*! 
+		\brief     Función que comprueba si todos los vertices estan unidos mediante un intermediario(o sin este) o no
+		\attention Se utiliza el modificador const en la definición de la función 
+		\note      Función inline
+		\return    True si, efectivamente, todos los vertices estan unidos. False si no
+		\pre       isEmpty()==false
+		\post      Ninguna
+	*/               
         bool todosUnidos()const{
                              std::vector<std::vector <int> > unidos=warshall();
                              for(int i=0;i<size();i++){
@@ -162,6 +188,14 @@ class Grafo{
                              }
                              return true;}
 
+        /*! 
+		\brief     Función que devuelve el peso total de los lados del grafo 
+		\attention Se utiliza el modificador const en la definición de la función 
+		\note      Función inline
+		\return    Peso de los lados del grafo, de tipo double
+		\pre       Ninguna
+		\post      Ninguna
+	*/               
          double getPesoTotal()const{
                             double sum=0;
                             for(unsigned int i=0;i<lados_.size();i++) sum=sum+lados_[i].getPeso();
@@ -182,7 +216,6 @@ class Grafo{
 		\brief     Función que inserta un vertice al grafo
                 \param     u: Valor del primer vertice del lado
                 \param     v: Valor del segundo vertice del lado
-                \param     peso: Valor del peso del lado
 		\pre       adjacent(u,v)==falso
 		\pre       existe(vetices_[u])==verdadero
 		\pre       existe(vertices_[v]))==verdadero
@@ -319,13 +352,40 @@ class Grafo{
                              return false;
                               }
                           
-   //! \name Algoritmos que devuelven el arbol abarcador de coste mínimo
-       ed::Grafo kruskal();
-       ed::Grafo prim();
-   //! \name Otros algoritmos
+ 
+      // ed::Grafo kruskal();
+
+
+      // ed::Grafo prim();
+
+
+   //! \name Algoritmos interesantes dentro del grafo
+
+ /*! 
+		\brief     Función que calcula la matriz de uniones mediante el algoritmo de Warshall
+                \attention Se utiliza el modificador const en la definición de la función 
+                \return    La matriz resultante de aplicar el algoritmo de Warshall
+		\pre       isEmpty()==false
+		\post      Ninguna
+	*/ 
        std::vector< std::vector<int> > warshall()const;
+
+       /*! 
+		\brief     Función que calcula el camino mínimo de un origen a todos los puntos mediante el algoritmo de dijkstra
+                \param     origen: Vertice que se usara como origen 
+                \return    Un item de la estructura Dijkstra, el cual tiene tanto los predecesores de cada nodo como el coste de llegar a este
+		\pre       origen>-1 y origen<size()
+		\pre       size()>1
+		\post      Ninguna
+	*/ 
        ed::Dijkstra dijkstra(int origen);
    //! \name Funcion para imprimir el grafo
+
+	/*! 
+		\brief     Función que imprime el grafo
+                \pre       Ninguna
+		\post      Ninguna
+	*/  
        void imprimir();
                               
 };
