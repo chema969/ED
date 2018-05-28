@@ -81,7 +81,8 @@ int main(){
                                          if(grafo.isEmpty()) std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;
                                          else{
                                          ed::Grafo aux=grafo.prim();
-                                         aux.imprimir();}
+                                         aux.imprimir();
+                                         std::cout<<"El peso total del arbol abarcador de coste minimo es "<<aux.getPesoTotal()<<std::endl;}
 					break;
                                     }
 
@@ -90,7 +91,8 @@ int main(){
                                        if(grafo.isEmpty()) std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;  
                                         else{
                                         ed::Grafo aux=grafo.kruskal();
-                                        aux.imprimir();}
+                                        aux.imprimir();
+                                        std::cout<<"El peso total del arbol abarcador de coste minimo es "<<aux.getPesoTotal()<<std::endl;}
 					break;
                                  }
                         case 7: 
@@ -119,10 +121,22 @@ int main(){
                                         ed::borrarVertice(grafo);
 					break;
                         
-            case 11: 
-                    std::cout << "[11] Mostrar las provincias que empiecen por una letra" << std::endl;
+            		case 11: 
+                   		        std::cout << "[11] Insertar un lado en el grafo" << std::endl;
+                                        ed::insertarLado(grafo);
 					break;
-			//////////////////////////////////////////////////////////////////////////////
+                          
+                        case 12: 
+                   		        std::cout << "[12] Borrar un lado del grafo" << std::endl;
+                                        ed::borrarLado(grafo);
+					break;           
+
+                          
+                        case 13: 
+                   		        std::cout << "[13] Calcular el camino minimo con Dijkstra" << std::endl;
+                                        ed::caminoMinimo(grafo);
+					break;                                 
+    			//////////////////////////////////////////////////////////////////////////////
 			default:
 				std::cout << BIRED;
 				std::cout << "Opción incorrecta ";

@@ -13,6 +13,11 @@
 
 namespace ed{
 
+struct Dijkstra{
+   std::vector <double> distancias;
+   std::vector <int> predecesores;
+   };
+
 //!  Definición de la clase Grafo
 class Grafo{
     //! \name Atributos privados de la clase Grafo
@@ -156,6 +161,12 @@ class Grafo{
                                    }
                              }
                              return true;}
+
+         double getPesoTotal()const{
+                            double sum=0;
+                            for(unsigned int i=0;i<lados_.size();i++) sum=sum+lados_[i].getPeso();
+                            return sum;
+                            }
     //! \name Modificadores de los vectores: funciones de modificación de la clase Grafo, sin tener en cuenta los modificadores de cursores, que irían aparte    
        
         /*! 
@@ -313,10 +324,12 @@ class Grafo{
        ed::Grafo prim();
    //! \name Otros algoritmos
        std::vector< std::vector<int> > warshall()const;
+       ed::Dijkstra dijkstra(int origen);
    //! \name Funcion para imprimir el grafo
        void imprimir();
                               
 };
+
 
 }
 #endif

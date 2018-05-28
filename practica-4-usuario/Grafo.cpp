@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <cmath>
 #include <iomanip> 
+#include <limits>
 namespace ed{
 
 
@@ -203,7 +204,7 @@ ed::Grafo ed::Grafo::prim(){
           int from_old=-1;
           std::vector<int>::iterator erase;
           int from_new=-1;
-          double peso=9999999999;
+          double peso=std::numeric_limits<double>::infinity();
           for(std::vector<int>::iterator it=por_ver.begin();it!=por_ver.end();it++){
               for(std::vector<int>::iterator jt=vistos.begin();jt!=vistos.end();jt++){
                   if(adjacent(*it,*jt)){
@@ -266,6 +267,45 @@ std::vector<std::vector<int> > ed::Grafo::warshall()const{
 }
 
 
+
+ed::Dijkstra ed::Grafo::dijkstra(int origen){
+     Dijkstra solucion;
+     solucion.distancias.resize(size());
+     solucion.predecesores.resize(size(),origen);
+     std::vector<bool> visitados;
+     visitados.resize(size(),false);
+
+     for(int i=0;i<size();i++){
+         if(findLado(origen,i)){
+           solucion.distancias[i]=currentLado().getPeso();
+          }
+          else solucion.distancias[i]=std::numeric_limits<double>::infinity();
+      }
+
+     visitados[origen]=true;
+ 
+     for(int i=0;i<size();i++){
+        double min=std::numeric_limits<double>::infinity();
+        int x;
+        for(int j=0;j<size();j++){
+           if((visitados[j]==false)&&(solucion.distancias[j]<min)){
+              min=solucion.distancias[j];
+              x=j;
+           }
+         }
+         visitados[x]=true;
+        for(int j=0;j<size();j++){
+          if(findLado(x,j)){
+             if((visitados[j]==false)&&(solucion.distancias[j]>solucion.distancias[x]+currentLado().getPeso())){
+                     solucion.distancias[j]=solucion.distancias[x]+currentLado().getPeso();
+                     solucion.predecesores[j]=x;
+              }
+          }
+        }
+      }
+    
+    return solucion;
+}
 
 
 }

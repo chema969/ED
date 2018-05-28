@@ -65,16 +65,24 @@ int ed::menu(){
 	
 
 	PLACE(posicion++,10);
-	std::cout << "[9] Insertar un vertice";
+	std::cout << "[9] Insertar un vertice en el grafo";
 
 	PLACE(posicion++,10);
-	std::cout << "[10] Borrar un municipio";
+	std::cout << "[10] Borrar un vertice en el grafo";
 
         PLACE(posicion++,10);
-	std::cout << "[11] Mostrar las provincias que empiecen por una letra";
+	std::cout << "[11] Insertar un lado en el grafo";
+
+        PLACE(posicion++,10);
+	std::cout << "[12] Borrar un lado del grafo";
         //////////////////////////////////////////////////////////////////////////////
 	posicion++;
-         
+
+         PLACE(posicion++,10);
+	std::cout << "[13] Calcular el camino minimo con dijkstra";        
+
+	posicion++;
+
 	PLACE(posicion++,10);
 	std::cout << BIRED << "[0] Salir";
 
@@ -198,3 +206,97 @@ void ed::borrarVertice(ed::Grafo &grafo){
      }
 }
 
+
+
+
+void ed::insertarLado(ed::Grafo &grafo){
+    if(grafo.isEmpty()){std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;return;}
+     std::cout<<BIBLUE<<"Escribe los dos vertices del lado separados por espacios"<<RESET<<std::endl;
+     int lado1,lado2;
+     std::cin>>lado1>>lado2;
+     std::cin.ignore();
+
+     if((lado1<0)||(lado2<0)||(lado1>=grafo.size())||(lado2>=grafo.size())){
+           std::cout<<BIRED<<"Al menos uno de los valores fue erroneo"<<RESET<<std::endl;
+           return;
+     }
+
+     if(lado1==lado2){
+           std::cout<<BIRED<<"No puedes unir un lado con si mismo"<<RESET<<std::endl;
+           return;
+     }
+
+     if(grafo.adjacent(lado1,lado2)){
+           std::cout<<BIRED<<"Ya existe un lado que une esos dos nodos"<<RESET<<std::endl;
+           return;
+     }
+
+     grafo.insertLado(lado1,lado2);
+     std::cout<<"\n\n"<<BIGREEN<<"EL lado ha sido correctamente insertado"<<RESET<<std::endl;
+   }
+
+
+
+
+void ed::borrarLado(ed::Grafo &grafo){
+    if(grafo.isEmpty()){std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;return;}
+     std::cout<<BIBLUE<<"Escribe los dos vertices del lado separados por espacios"<<RESET<<std::endl;
+     int lado1,lado2;
+     std::cin>>lado1>>lado2;
+     std::cin.ignore();
+
+     if((lado1<0)||(lado2<0)||(lado1>=grafo.size())||(lado2>=grafo.size())){
+           std::cout<<BIRED<<"Al menos uno de los valores fue erroneo"<<RESET<<std::endl;
+           return;
+     }
+
+     if(!grafo.adjacent(lado1,lado2)){
+           std::cout<<BIRED<<"No existe ningun lado que una esos dos nodos"<<std::endl;
+           return;
+     }
+
+     grafo.findLado(lado1,lado2);
+     grafo.removeLado();
+     std::cout<<"\n\n"<<BIGREEN<<"EL lado ha sido correctamente eliminado"<<RESET<<std::endl;
+     }
+
+
+
+void ed::caminoMinimo(ed::Grafo &grafo){
+     if(grafo.isEmpty()){std::cout<<BIRED<<"El grafo esta vacio"<<RESET<<std::endl;return;}
+     if(grafo.size()==1){std::cout<<BIRED<<"El grafo es demasiado pequeño para aplicar dikjstra"<<RESET<<std::endl;return;}
+     std::cout<<BIBLUE<<"Escribe el vertice de origen"<<RESET<<std::endl;
+     int origen,destino=-1;
+     std::cin>>origen;
+     std::cin.ignore();
+
+     if((origen<0)||(origen>=grafo.size())){std::cout<<BIRED<<"Valor de origen erroneo"<<RESET<<std::endl;return;}
+
+     ed::Dijkstra camino=grafo.dijkstra(origen);
+     
+     while(destino==-1){
+       std::cout<<BIBLUE<<"Escribe el vertice destino"<<RESET<<std::endl;
+       std::cin>>destino;
+       std::cin.ignore();
+       if((destino<0)||(destino>=grafo.size())){std::cout<<BIRED<<"Valor de destino erroneo,vuelve a introducir"<<RESET<<std::endl; destino=-1;}
+     }
+       std::cout<<"\n\n"<<BICYAN<<"El camino minimo es ";
+
+       escrituraRecursiva(camino,destino,origen);
+       std::cout<<"con un peso de "<<camino.distancias[destino]<<RESET<<std::endl;
+}
+
+
+
+
+
+void ed::escrituraRecursiva(ed::Dijkstra camino,int destino,int origen){
+     if(destino==origen){
+        std::cout<<origen<<", ";
+        return;
+     }
+     else{
+        ed::escrituraRecursiva(camino,camino.predecesores[destino],origen);
+        std::cout<<destino<<", ";
+     }
+ }
